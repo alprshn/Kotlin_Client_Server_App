@@ -26,8 +26,8 @@ class SignInActivity : AppCompatActivity() {
         binding.textCreateNewAccount.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
-            binding.buttonSignIn.setOnClickListener { v-> addDataToFireStore() }
         }
+        binding.buttonSignIn.setOnClickListener { v-> addDataToFireStore() }
     }
 
     private fun addDataToFireStore() {
@@ -35,7 +35,7 @@ class SignInActivity : AppCompatActivity() {
         var data: HashMap<String, Any> = HashMap()
         data["first_name"] = "Chirag"
         data["last_name"] = "Kacchadiva"
-        database.collection("users").add(data).addOnSuccessListener { documentReference ->
+        database.collection("users").add(data).addOnSuccessListener { _ ->
             Toast.makeText(this, "Data Inserted", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener{exception ->
             Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
