@@ -106,7 +106,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp" />
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonSıgnUp"
+            android:id="@+id/buttonSignUp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_16sdp"
