@@ -16,6 +16,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.client_server_app.R
 import com.example.client_server_app.databinding.ActivitySignUpBinding
+import com.example.client_server_app.utilities.Constants
+import com.google.firebase.firestore.FirebaseFirestore
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
@@ -56,6 +58,9 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun SignUp() {
         Loading(true)
+        var database : FirebaseFirestore = FirebaseFirestore.getInstance()
+        var user : HashMap<String, Any> = HashMap()
+        user.put(Constants.KEY_NAME,binding.inputName.text.toString())
 
     }
 
