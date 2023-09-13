@@ -1,17 +1,25 @@
 package com.example.client_server_app.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Base64
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.client_server_app.R
 import com.example.client_server_app.databinding.ActivitySignUpBinding
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.FileNotFoundException
+import java.io.InputStream
 import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
@@ -34,6 +42,12 @@ class SignUpActivity : AppCompatActivity() {
                 SignUp()
             }
         }
+        binding.layoutImage.setOnClickListener { v ->
+            var intent: Intent =
+                Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            pickImage.launch(intent)
+        }
     }
 
     private fun ShowToast(message: String) {
@@ -41,6 +55,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun SignUp() {
+        Loading(true)
 
     }
 
@@ -70,6 +85,26 @@ class SignUpActivity : AppCompatActivity() {
             return false
         } else {
             return true
+        }
+    }
+
+    private val pickImage = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            if (result.data != null) {
+                val imageUri: Uri? = result.data?.data
+                val inputStream: InputStream? = contentResolver.openInputStream(imageUri!!)
+                try {
+                    val bitmap = BitmapFactory.decodeStream(inputStream)
+                    binding.imageProfile.setImageBitmap(bitmap)
+                    binding.textAddImage.visibility = View.GONE
+                    encodedImage = EncodeImage(bitmap)
+
+                } catch (e: FileNotFoundException) {
+                    e.printStackTrace()
+                }
+            }
         }
     }
 
