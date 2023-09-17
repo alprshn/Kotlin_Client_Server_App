@@ -34,10 +34,10 @@ class SignInActivity : AppCompatActivity() {
         binding.textCreateNewAccount.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
-            binding.buttonSignIn.setOnClickListener { v ->
-                if (IsValidSignInDetails()) {
-                    SignIn()
-                }
+        }
+        binding.buttonSignIn.setOnClickListener { v ->
+            if (IsValidSignInDetails()) {
+                SignIn()
             }
         }
 
