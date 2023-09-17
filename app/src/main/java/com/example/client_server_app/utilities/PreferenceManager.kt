@@ -21,7 +21,7 @@ class PreferenceManager(context: Context) {
         return sharedPreferences.getBoolean(key, false)
     }
 
-    fun PutString(key: String, value: String) {
+    fun PutString(key: String, value: String?) {
         var editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putString(key, value)
         editor.apply()
