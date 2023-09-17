@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.example.client_server_app.R
 import com.example.client_server_app.databinding.ActivitySignUpBinding
 import com.example.client_server_app.utilities.Constants
+import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -28,11 +29,13 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var encodedImage: String
+    private lateinit var preferenceManager: PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        preferenceManager = PreferenceManager(applicationContext)
         SetListener()
     }
 

@@ -3,10 +3,10 @@ package com.example.client_server_app.utilities
 import android.content.Context
 import android.content.SharedPreferences
 
-class PreferenceManager {
-    private lateinit var sharedPreferences: SharedPreferences
+class PreferenceManager(context: Context) {
+    private val sharedPreferences: SharedPreferences
 
-    fun PreferenceManager(context: Context) {
+    init {
         sharedPreferences =
             context.getSharedPreferences(Constants.KEY_PREFERENCE_NAME, Context.MODE_PRIVATE)
     }
