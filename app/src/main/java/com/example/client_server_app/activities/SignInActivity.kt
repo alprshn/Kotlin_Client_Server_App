@@ -21,6 +21,11 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
         preferenceManager = PreferenceManager(applicationContext)
+        if (preferenceManager.GetBoolean(Constants.KEY_IS_SIGNED_IN)) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         setListener()
     }
 
@@ -63,7 +68,7 @@ class SignInActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     startActivity(intent)
-                } else{
+                } else {
                     Loading(false)
                     ShowToast("Unable To Sign In")
                 }
