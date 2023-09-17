@@ -107,7 +107,7 @@ class SignUpActivity : AppCompatActivity() {
         } else if (binding.inputConfirmPassword.text.toString().trim().isEmpty()) {
             ShowToast("Confirm Your Password")
             return false
-        } else if (binding.inputPassword.text.toString()
+        } else if (!binding.inputPassword.text.toString()
                 .equals(binding.inputConfirmPassword.text.toString())
         ) {
             ShowToast("Password & Confirm Password Must Be Same")
