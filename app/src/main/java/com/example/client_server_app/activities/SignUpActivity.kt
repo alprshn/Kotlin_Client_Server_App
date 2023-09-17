@@ -58,9 +58,16 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun SignUp() {
         Loading(true)
-        var database : FirebaseFirestore = FirebaseFirestore.getInstance()
-        var user : HashMap<String, Any> = HashMap()
-        user.put(Constants.KEY_NAME,binding.inputName.text.toString())
+        var database: FirebaseFirestore = FirebaseFirestore.getInstance()
+        var user: HashMap<String, Any> = HashMap()
+        user.put(Constants.KEY_NAME, binding.inputName.text.toString())
+        user.put(Constants.KEY_EMAIL, binding.inputEmail.text.toString())
+        user.put(Constants.KEY_PASSWORD, binding.inputPassword.text.toString())
+        user.put(Constants.KEY_IMAGE, encodedImage)
+        database.collection(Constants.KEY_COLLECTION_USERS).add(user)
+            .addOnSuccessListener { documentReference -> }
+            .addOnFailureListener { exception -> }
+
 
     }
 
