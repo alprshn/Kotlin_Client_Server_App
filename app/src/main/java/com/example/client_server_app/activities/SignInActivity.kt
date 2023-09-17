@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.client_server_app.databinding.ActivitySignInBinding
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
-import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -95,11 +94,11 @@ class SignInActivity : AppCompatActivity() {
         if (binding.inputEmail.text.toString().trim().isEmpty()) {
             ShowToast("Enter Email")
             return false
-        } else if (binding.inputPassword.text.toString().trim().isEmpty()) {
-            ShowToast("Enter Password")
-            return false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.inputEmail.text.toString()).matches()) {
             ShowToast("Enter Valid Email")
+            return false
+        } else if (binding.inputPassword.text.toString().trim().isEmpty()) {
+            ShowToast("Enter Password")
             return false
         } else {
             return true
