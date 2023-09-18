@@ -60,7 +60,7 @@
             android:layout_gravity="center" />
 
         <TextView
-            android:id="@+id/textErrorMesseage"
+            android:id="@+id/textErrorMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
