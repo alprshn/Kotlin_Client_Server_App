@@ -18,6 +18,7 @@ class UsersActivity : AppCompatActivity() {
         binding = ActivityUsersBinding.inflate(layoutInflater)
         setContentView(binding.root)
         preferenceManager = PreferenceManager(applicationContext)
+        SetListeners()
         GetUsers()
     }
 
@@ -38,7 +39,7 @@ class UsersActivity : AppCompatActivity() {
                     if (currentUserId.equals(queryDocumentSnapShot.id)) {
                         continue
                     }
-                    var user: User = User()
+                    val user = User()
                     user.name = queryDocumentSnapShot.getString(Constants.KEY_NAME)!!
                     user.email = queryDocumentSnapShot.getString(Constants.KEY_EMAIL)!!
                     user.image = queryDocumentSnapShot.getString(Constants.KEY_IMAGE)!!
@@ -46,7 +47,7 @@ class UsersActivity : AppCompatActivity() {
                     users.add(user)
                 }
                 if (users.size > 0) {
-                    var usersAdapter: UsersAdapter = UsersAdapter(users)
+                    val usersAdapter = UsersAdapter(users)
                     binding.usersRecyclerView.adapter = usersAdapter
                     binding.usersRecyclerView.visibility = View.VISIBLE
                 } else {

@@ -14,6 +14,24 @@ import com.example.client_server_app.utilities.Constants
 class UsersAdapter(private val users: List<User>) :
     RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
 
+    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private lateinit var binding: ItemContainerUserBinding
+        private lateinit var adapter: UsersAdapter
+
+        constructor(itemContainerUserBinding: ItemContainerUserBinding) : this(
+            itemContainerUserBinding.root
+        ) {
+            binding = itemContainerUserBinding
+        }
+
+        fun SetUserData(user: User) {
+            binding.textName.text = user.name
+            binding.textEmail.text = user.email
+            binding.imageProfile.setImageBitmap(adapter.GetUserImage(user.image))
+
+        }
+    }
+
     private fun GetUserImage(encodedImage: String): Bitmap {
         val bytes: ByteArray = Base64.decode(encodedImage, Base64.DEFAULT)
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
@@ -32,25 +50,6 @@ class UsersAdapter(private val users: List<User>) :
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.SetUserData(users.get(position))
-    }
-
-
-    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private lateinit var binding: ItemContainerUserBinding
-        private lateinit var adapter: UsersAdapter
-
-        constructor(itemContainerUserBinding: ItemContainerUserBinding) : this(
-            itemContainerUserBinding.root
-        ) {
-            binding = itemContainerUserBinding
-        }
-
-        fun SetUserData(user: User) {
-            binding.textName.text = user.name
-            binding.textEmail.text = user.email
-            binding.imageProfile.setImageBitmap(adapter.GetUserImage(user.image))
-
-        }
     }
 
 }
