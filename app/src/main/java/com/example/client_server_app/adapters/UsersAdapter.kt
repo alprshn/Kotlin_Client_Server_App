@@ -36,8 +36,8 @@ class UsersAdapter(private val users: List<User>) :
 
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        lateinit var binding: ItemContainerUserBinding
-        lateinit var adapter: UsersAdapter
+        private lateinit var binding: ItemContainerUserBinding
+        private lateinit var adapter: UsersAdapter
 
         constructor(itemContainerUserBinding: ItemContainerUserBinding) : this(
             itemContainerUserBinding.root
