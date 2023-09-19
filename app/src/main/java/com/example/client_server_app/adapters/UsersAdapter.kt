@@ -16,7 +16,6 @@ class UsersAdapter(private val users: List<User>) :
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var binding: ItemContainerUserBinding
-        private lateinit var adapter: UsersAdapter
 
         constructor(itemContainerUserBinding: ItemContainerUserBinding) : this(
             itemContainerUserBinding.root
@@ -27,15 +26,16 @@ class UsersAdapter(private val users: List<User>) :
         fun SetUserData(user: User) {
             binding.textName.text = user.name
             binding.textEmail.text = user.email
-            binding.imageProfile.setImageBitmap(adapter.GetUserImage(user.image))
+            binding.imageProfile.setImageBitmap(GetUserImage(user.image))
 
+        }
+
+        private fun GetUserImage(encodedImage: String): Bitmap {
+            val bytes: ByteArray = Base64.decode(encodedImage, Base64.DEFAULT)
+            return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
         }
     }
 
-    private fun GetUserImage(encodedImage: String): Bitmap {
-        val bytes: ByteArray = Base64.decode(encodedImage, Base64.DEFAULT)
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         var itemContainerUserBinding: ItemContainerUserBinding = ItemContainerUserBinding.inflate(
