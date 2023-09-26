@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Client_Server_App</string>
     <string name="select_users">Select Users</string>
+    <string name="type_a_message">Type A Message</string>
 </resources>
