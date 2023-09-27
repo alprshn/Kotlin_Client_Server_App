@@ -11,6 +11,8 @@ class Constants {
         const val KEY_USER_ID: String = "userId"
         const val KEY_IMAGE: String = "image"
         const val KEY_FCM_TOKEN: String = "fcmToken"
+        const val KEY_USER: String = "user"
+
     }
 
 }

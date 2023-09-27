@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.client_server_app.databinding.ItemContainerUserBinding
+import com.example.client_server_app.listeners.UserListener
 import com.example.client_server_app.models.User
 import com.example.client_server_app.utilities.Constants
 
 class UsersAdapter(private val users: List<User>) :
     RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
-
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var binding: ItemContainerUserBinding
-
+        private lateinit var userListener: UserListener
         constructor(itemContainerUserBinding: ItemContainerUserBinding) : this(
             itemContainerUserBinding.root
         ) {
@@ -27,7 +27,7 @@ class UsersAdapter(private val users: List<User>) :
             binding.textName.text = user.name
             binding.textEmail.text = user.email
             binding.imageProfile.setImageBitmap(GetUserImage(user.image))
-
+            binding.root.setOnClickListener{v-> userListener.OnUserClicked(user)}
         }
 
         private fun GetUserImage(encodedImage: String): Bitmap {
