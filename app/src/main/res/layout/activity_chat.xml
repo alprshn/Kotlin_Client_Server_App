@@ -68,7 +68,7 @@
         android:padding="@dimen/_20sdp"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="viewBackground"
+        app:layout_constraintBottom_toBottomOf="@id/viewBackground"
         app:layout_constraintTop_toBottomOf="@id/imageBack" />
 
     <ProgressBar
