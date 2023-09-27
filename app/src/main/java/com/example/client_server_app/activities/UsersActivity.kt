@@ -100,5 +100,6 @@ class UsersActivity : AppCompatActivity(), UserListener {
         val intent = Intent(applicationContext, ChatActivity::class.java)
         intent.putExtra(Constants.KEY_USER, user)
         startActivity(intent)
+        finish()
     }
 }
