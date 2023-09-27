@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.client_server_app.databinding.ItemContainerUserBinding
 import com.example.client_server_app.listeners.UserListener
 import com.example.client_server_app.models.User
-import com.example.client_server_app.utilities.Constants
-
 class UsersAdapter(private val users: List<User>, private var userListener: UserListener) :
     RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
