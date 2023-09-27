@@ -15,11 +15,18 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        SetListeners()
+        LoadReceiverDetails()
+
     }
 
 
     private fun LoadReceiverDetails() {
-        receiverUser = (intent.getSerializableExtra(Constants.KEY_USER) as? User)!!
+        receiverUser = intent.getSerializableExtra(Constants.KEY_USER) as User
         binding.textName.text = receiverUser.name
+    }
+
+    private fun SetListeners() {
+        binding.imageBack.setOnClickListener { v -> onBackPressed() }
     }
 }

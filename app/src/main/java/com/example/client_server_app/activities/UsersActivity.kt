@@ -63,7 +63,7 @@ class UsersActivity : AppCompatActivity(), UserListener {
                     Log.e("Hata", "Hata3")
                 }
                 if (users.size > 0) {
-                    val usersAdapter = UsersAdapter(users)
+                    val usersAdapter = UsersAdapter(users, this)
                     binding.usersRecyclerView.adapter = usersAdapter
                     Log.e("Hata", "Hata4")
                     binding.usersRecyclerView.visibility = View.VISIBLE
