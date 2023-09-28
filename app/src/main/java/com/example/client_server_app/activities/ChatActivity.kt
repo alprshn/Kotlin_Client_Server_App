@@ -39,6 +39,7 @@ class ChatActivity : AppCompatActivity() {
         SetListeners()
         LoadReceiverDetails()
         init()
+        ListenMessages()
     }
 
     private fun SendMessage() {
@@ -118,7 +119,22 @@ class ChatActivity : AppCompatActivity() {
             binding.chatRecyclerView.visibility = View.VISIBLE
         }
         binding.progressBar.visibility = View.GONE
-
     }
+
+    private fun ListenMessages() {
+        database.collection(Constants.KEY_COLLECTION_CHAT).whereEqualTo(
+            Constants.KEY_SENDER_ID,
+            preferenceManager.getString(Constants.KEY_USER_ID)
+        ).whereEqualTo(Constants.KEY_RECEIVER_ID, receiverUser.id)
+            .addSnapshotListener(eventListener)
+
+        database.collection(Constants.KEY_COLLECTION_CHAT)
+            .whereEqualTo(Constants.KEY_SENDER_ID, receiverUser.id).whereEqualTo(
+                Constants.KEY_RECEIVER_ID,
+                preferenceManager.getString(Constants.KEY_USER_ID)
+            ).addSnapshotListener(eventListener)
+    }
+
+
 }
 
