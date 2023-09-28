@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.GetChars
 import android.util.Base64
+import android.view.View
 import com.example.client_server_app.R
 import com.example.client_server_app.adapters.ChatAdapter
 import com.example.client_server_app.databinding.ActivityChatBinding
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import java.text.SimpleDateFormat
+import java.util.Collections
 import java.util.Date
 import java.util.Locale
 
@@ -103,10 +105,20 @@ class ChatActivity : AppCompatActivity() {
                     chatMessage.dateObject =
                         documentChange.document.getDate(Constants.KEY_TIMESTAMP)!!
                     chatMessages.add(chatMessage)
-
                 }
             }
+            chatMessages.sortWith(compareBy { it.dateObject })
+
+            if (count == 0) {
+                chatAdapter.notifyDataSetChanged()
+            } else {
+                chatAdapter.notifyItemRangeInserted(chatMessages.size, chatMessages.size)
+                binding.chatRecyclerView.smoothScrollToPosition(chatMessages.size - 1)
+            }
+            binding.chatRecyclerView.visibility = View.VISIBLE
         }
+        binding.progressBar.visibility = View.GONE
+
     }
 }
 
