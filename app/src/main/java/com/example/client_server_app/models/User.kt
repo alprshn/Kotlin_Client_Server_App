@@ -7,4 +7,5 @@ class User : Serializable {
     lateinit var image: String
     lateinit var email: String
     lateinit var token: String
+    lateinit var id: String
 }
