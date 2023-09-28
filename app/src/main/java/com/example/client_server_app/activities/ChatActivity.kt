@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.GetChars
 import android.util.Base64
 import com.example.client_server_app.R
 import com.example.client_server_app.adapters.ChatAdapter
@@ -12,8 +13,12 @@ import com.example.client_server_app.models.ChatMessage
 import com.example.client_server_app.models.User
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
+import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
@@ -68,4 +73,11 @@ class ChatActivity : AppCompatActivity() {
         binding.imageBack.setOnClickListener { v -> onBackPressed() }
         binding.layoutSend.setOnClickListener { v -> SendMessage() }
     }
+
+    private fun GetReadableDateTime(date: Date): String {
+        val dateFormat = SimpleDateFormat("MMMM dd, yyyy - hh:mm a", Locale.getDefault())
+        return dateFormat.format(date)
+    }
+
+    private fun EventListener<QuerySnapshot>
 }
