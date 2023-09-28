@@ -13,6 +13,8 @@ import com.example.client_server_app.models.ChatMessage
 import com.example.client_server_app.models.User
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -23,7 +25,7 @@ import java.util.Locale
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
     private lateinit var receiverUser: User
-    private lateinit var chatMessages: List<ChatMessage>
+    private lateinit var chatMessages: ArrayList<ChatMessage>
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var preferenceManager: PreferenceManager
     private lateinit var database: FirebaseFirestore
@@ -74,10 +76,37 @@ class ChatActivity : AppCompatActivity() {
         binding.layoutSend.setOnClickListener { v -> SendMessage() }
     }
 
-    private fun GetReadableDateTime(date: Date): String {
+    private fun GetReadableDateTime(date: Date?): String {
         val dateFormat = SimpleDateFormat("MMMM dd, yyyy - hh:mm a", Locale.getDefault())
         return dateFormat.format(date)
     }
 
-    private fun EventListener<QuerySnapshot>
+    val eventListener = EventListener<QuerySnapshot> { value, error ->
+        if (error !== null) {
+            return@EventListener
+        }
+
+        if (value != null) {
+            var count: Int = chatMessages.size
+            var documentChange: DocumentChange
+            for (documentChange in value.getDocumentChanges()) {
+                if (documentChange.type == DocumentChange.Type.ADDED) {
+                    var chatMessage: ChatMessage = ChatMessage()
+                    chatMessage.senderId =
+                        documentChange.document.getString(Constants.KEY_SENDER_ID).toString()
+                    chatMessage.receiverId =
+                        documentChange.document.getString(Constants.KEY_RECEIVER_ID).toString()
+                    chatMessage.message =
+                        documentChange.document.getString(Constants.KEY_MESSAGE).toString()
+                    chatMessage.dateTime =
+                        GetReadableDateTime(documentChange.document.getDate(Constants.KEY_TIMESTAMP))
+                    chatMessage.dateObject =
+                        documentChange.document.getDate(Constants.KEY_TIMESTAMP)!!
+                    chatMessages.add(chatMessage)
+
+                }
+            }
+        }
+    }
 }
+
