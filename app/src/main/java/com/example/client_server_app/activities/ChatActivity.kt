@@ -13,6 +13,7 @@ import com.example.client_server_app.models.User
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Date
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
@@ -29,6 +30,16 @@ class ChatActivity : AppCompatActivity() {
         SetListeners()
         LoadReceiverDetails()
         init()
+    }
+
+    private fun SendMessage() {
+        var message: HashMap<String, Any> = HashMap()
+        message.put(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID)!!)
+        message.put(Constants.KEY_RECEIVER_ID, receiverUser.id)
+        message.put(Constants.KEY_MESSAGE, binding.inputMessage.text.toString())
+        message.put(Constants.KEY_TIMESTAMP, Date())
+        database.collection(Constants.KEY_COLLECTION_CHAT).add(message)
+        binding.inputMessage.text = null
     }
 
     private fun init() {
