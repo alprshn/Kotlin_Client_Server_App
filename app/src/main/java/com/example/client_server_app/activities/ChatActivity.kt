@@ -4,10 +4,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.GetChars
 import android.util.Base64
 import android.view.View
-import com.example.client_server_app.R
 import com.example.client_server_app.adapters.ChatAdapter
 import com.example.client_server_app.databinding.ActivityChatBinding
 import com.example.client_server_app.models.ChatMessage
@@ -15,12 +13,10 @@ import com.example.client_server_app.models.User
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import java.text.SimpleDateFormat
-import java.util.Collections
 import java.util.Date
 import java.util.Locale
 

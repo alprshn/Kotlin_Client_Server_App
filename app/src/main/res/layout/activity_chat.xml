@@ -72,6 +72,7 @@
         android:id="@+id/viewSupporter"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:background="@color/black"
         android:layout_marginTop="@dimen/_12sdp"
         app:layout_constraintTop_toBottomOf="@id/imageBack" />
 
@@ -84,6 +85,7 @@
         android:overScrollMode="never"
         android:padding="@dimen/_20sdp"
         android:visibility="gone"
+        app:stackFromEnd="true"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="@id/viewBackground"
         app:layout_constraintTop_toBottomOf="@id/viewSupporter" />
