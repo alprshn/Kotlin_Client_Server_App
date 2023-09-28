@@ -66,5 +66,6 @@ class ChatActivity : AppCompatActivity() {
 
     private fun SetListeners() {
         binding.imageBack.setOnClickListener { v -> onBackPressed() }
+        binding.layoutSend.setOnClickListener { v -> SendMessage() }
     }
 }
