@@ -14,6 +14,7 @@ import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
@@ -48,6 +49,9 @@ class ChatActivity : AppCompatActivity() {
         message.put(Constants.KEY_TIMESTAMP, Date())
         database.collection(Constants.KEY_COLLECTION_CHAT).add(message)
         binding.inputMessage.text = null
+        if (conversionId != null ){
+
+        }
     }
 
     private fun init() {
@@ -117,6 +121,23 @@ class ChatActivity : AppCompatActivity() {
             binding.chatRecyclerView.visibility = View.VISIBLE
         }
         binding.progressBar.visibility = View.GONE
+
+        if (conversionId == null) {
+            CheckForConversion()
+        }
+    }
+
+    private fun AddConversion(conversion: HashMap<String, Any>) {
+        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).add(conversion)
+            .addOnSuccessListener { documentReference -> conversionId = documentReference.id }
+    }
+
+    private fun UpdateConversion(message: String) {
+        var documentReference: DocumentReference =
+            database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).document(conversionId)
+        documentReference.update(
+            Constants.KEY_LAST_MESSAGE, message, Constants.KEY_TIMESTAMP, Date()
+        )
     }
 
     private fun ListenMessages() {
