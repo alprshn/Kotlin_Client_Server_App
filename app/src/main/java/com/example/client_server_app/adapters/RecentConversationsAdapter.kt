@@ -8,16 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.client_server_app.databinding.ItemContainerRecentConversionBinding
+import com.example.client_server_app.listeners.ConversionListener
 import com.example.client_server_app.models.ChatMessage
+import com.example.client_server_app.models.User
 
 
 class RecentConversationsAdapter :
     RecyclerView.Adapter<RecentConversationsAdapter.ConversionViewHolder> {
 
     private val chatMessages: List<ChatMessage>
+    private val conversionListener: ConversionListener
 
-    constructor(chatMessages: List<ChatMessage>) {
+    constructor(chatMessages: List<ChatMessage>, conversionListener: ConversionListener) {
         this.chatMessages = chatMessages
+        this.conversionListener = conversionListener
     }
 
     inner class ConversionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,6 +37,13 @@ class RecentConversationsAdapter :
             binding.imageProfile.setImageBitmap(GetConversionImage(chatMessage.conversionImage))
             binding.textName.text = chatMessage.conversionName
             binding.textRecentMessage.text = chatMessage.message
+            binding.root.setOnClickListener { v ->
+                var user: User = User()
+                user.id = chatMessage.conversionId
+                user.name = chatMessage.conversionName
+                user.image = chatMessage.conversionImage
+                conversionListener.OnConversionClicked(user)
+            }
         }
     }
 
