@@ -48,7 +48,6 @@ class ChatActivity : AppCompatActivity() {
         message.put(Constants.KEY_MESSAGE, binding.inputMessage.text.toString())
         message.put(Constants.KEY_TIMESTAMP, Date())
         database.collection(Constants.KEY_COLLECTION_CHAT).add(message)
-        binding.inputMessage.text = null
         if (conversionId != null) {
             UpdateConversion(binding.inputMessage.text.toString())
         } else {
@@ -70,8 +69,9 @@ class ChatActivity : AppCompatActivity() {
             conversion.put(Constants.KEY_RECEIVER_IMAGE, receiverUser.image)
             conversion.put(Constants.KEY_LAST_MESSAGE, binding.inputMessage.text.toString())
             conversion.put(Constants.KEY_TIMESTAMP, Date())
-
+            AddConversion(conversion)
         }
+        binding.inputMessage.text = null
     }
 
     private fun init() {
