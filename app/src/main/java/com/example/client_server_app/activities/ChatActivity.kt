@@ -133,6 +133,28 @@ class ChatActivity : AppCompatActivity() {
             ).addSnapshotListener(eventListener)
     }
 
+
+    private fun CheckForConversionRemotly(senderId: String, receiverId: String) {
+        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
+            .whereEqualTo(Constants.KEY_SENDER_ID, senderId)
+            .whereEqualTo(Constants.KEY_RECEIVER_ID, receiverId).get().addOnCompleteListener(
+                conversionOnCompleteListener
+            )
+    }
+
+    private fun CheckForConversion() {
+        if (chatMessages.size != 0) {
+            CheckForConversionRemotly(
+                preferenceManager.getString(Constants.KEY_USER_ID).toString(),
+                receiverUser.id
+            )
+            CheckForConversionRemotly(
+                receiverUser.id,
+                preferenceManager.getString(Constants.KEY_USER_ID).toString()
+            )
+        }
+    }
+
     val conversionOnCompleteListener = OnCompleteListener<QuerySnapshot> { task ->
         if (task.isSuccessful && task.result != null && task.result.documents.size > 0) {
             var documentSnapshot: DocumentSnapshot = task.result.documents.get(0)
