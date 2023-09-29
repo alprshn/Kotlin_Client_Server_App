@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
 import android.widget.Toast
+import com.example.client_server_app.adapters.RecentConversationsAdapter
 import com.example.client_server_app.databinding.ActivityMainBinding
+import com.example.client_server_app.models.ChatMessage
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.firestore.DocumentReference
@@ -19,6 +21,9 @@ import com.google.firebase.messaging.FirebaseMessaging
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var preferenceManager: PreferenceManager
+    private lateinit var conversations: List<ChatMessage>
+    private lateinit var conversationsAdapter: RecentConversationsAdapter
+    private lateinit var database: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +33,13 @@ class MainActivity : AppCompatActivity() {
         LoadUserDetails()
         GetToken()
         SetListener()
+    }
+
+    private fun init(){
+        conversations = ArrayList()
+        conversationsAdapter = RecentConversationsAdapter(conversations)
+        binding.conversationsRecyclerView.adapter = conversationsAdapter
+        database = FirebaseFirestore.getInstance()
     }
 
     private fun SetListener() {
