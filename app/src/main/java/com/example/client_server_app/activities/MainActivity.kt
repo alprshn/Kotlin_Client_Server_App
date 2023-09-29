@@ -10,7 +10,9 @@ import android.view.View
 import android.widget.Toast
 import com.example.client_server_app.adapters.RecentConversationsAdapter
 import com.example.client_server_app.databinding.ActivityMainBinding
+import com.example.client_server_app.listeners.ConversionListener
 import com.example.client_server_app.models.ChatMessage
+import com.example.client_server_app.models.User
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.firestore.DocumentChange
@@ -22,7 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.messaging.FirebaseMessaging
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),ConversionListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var preferenceManager: PreferenceManager
     private lateinit var conversations: ArrayList<ChatMessage>
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         conversations = ArrayList()
-        conversationsAdapter = RecentConversationsAdapter(conversations)
+        conversationsAdapter = RecentConversationsAdapter(conversations, this)
         binding.conversationsRecyclerView.adapter = conversationsAdapter
         database = FirebaseFirestore.getInstance()
     }
@@ -173,5 +175,11 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(applicationContext, SignInActivity::class.java))
                 finish()
             }.addOnFailureListener { e -> ShowToast("Unable To Sign Out") }
+    }
+
+    override fun OnConversionClicked(user: User) {
+        val intent = Intent(applicationContext, ChatActivity::class.java)
+        intent.putExtra(Constants.KEY_USER, user)
+        startActivity(intent)
     }
 }
