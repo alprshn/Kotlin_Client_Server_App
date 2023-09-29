@@ -3,13 +3,16 @@ package com.example.client_server_app.adapters
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.client_server_app.databinding.ItemContainerRecentConversionBinding
 import com.example.client_server_app.models.ChatMessage
 
 
-class RecentConversationsAdapter: RecyclerView.Adapter<RecentConversationsAdapter.ConversionViewHolder> {
+class RecentConversationsAdapter :
+    RecyclerView.Adapter<RecentConversationsAdapter.ConversionViewHolder> {
 
     private val chatMessages: List<ChatMessage>
 
@@ -36,5 +39,21 @@ class RecentConversationsAdapter: RecyclerView.Adapter<RecentConversationsAdapte
     private fun GetConversionImage(encodedImage: String): Bitmap {
         val bytes: ByteArray = Base64.decode(encodedImage, Base64.DEFAULT)
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConversionViewHolder {
+        return ConversionViewHolder(
+            ItemContainerRecentConversionBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
+    }
+
+    override fun getItemCount(): Int {
+        return chatMessages.size
+    }
+
+    override fun onBindViewHolder(holder: ConversionViewHolder, position: Int) {
+        holder.SetData(chatMessages.get(position))
     }
 }
