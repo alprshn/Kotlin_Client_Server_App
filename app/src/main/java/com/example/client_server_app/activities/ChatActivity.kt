@@ -12,7 +12,9 @@ import com.example.client_server_app.models.ChatMessage
 import com.example.client_server_app.models.User
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -27,7 +29,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var preferenceManager: PreferenceManager
     private lateinit var database: FirebaseFirestore
-
+    private lateinit var conversionId: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
@@ -131,6 +133,12 @@ class ChatActivity : AppCompatActivity() {
             ).addSnapshotListener(eventListener)
     }
 
+    val conversionOnCompleteListener = OnCompleteListener<QuerySnapshot> { task ->
+        if (task.isSuccessful && task.result != null && task.result.documents.size > 0) {
+            var documentSnapshot: DocumentSnapshot = task.result.documents.get(0)
+            conversionId = documentSnapshot.id
+        }
 
+    }
 }
 
