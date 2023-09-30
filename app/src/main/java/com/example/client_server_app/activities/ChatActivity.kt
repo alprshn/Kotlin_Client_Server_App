@@ -102,6 +102,11 @@ class ChatActivity : BaseActivity() {
                         isReceiverAvailable = availability == 1
                     }
                 }
+                if (isReceiverAvailable) {
+                    binding.textAvailability.visibility = View.VISIBLE
+                } else {
+                    binding.textAvailability.visibility = View.GONE
+                }
             }
     }
 
