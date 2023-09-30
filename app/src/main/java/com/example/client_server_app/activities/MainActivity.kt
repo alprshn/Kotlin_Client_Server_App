@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.messaging.FirebaseMessaging
+import es.dmoral.toasty.Toasty
 
 
 class MainActivity : BaseActivity(), ConversionListener {
@@ -137,7 +138,7 @@ class MainActivity : BaseActivity(), ConversionListener {
     }
 
     private fun ShowToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        Toasty.info(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun UpdateToken(token: String) {

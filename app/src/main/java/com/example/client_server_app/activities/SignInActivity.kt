@@ -11,6 +11,7 @@ import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import es.dmoral.toasty.Toasty
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
@@ -87,7 +88,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun ShowToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        Toasty.info(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun IsValidSignInDetails(): Boolean {
