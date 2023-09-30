@@ -81,10 +81,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#008000"
+        android:text="@string/online"
         android:padding="@dimen/_2sdp"
         android:textColor="@color/white"
         android:textSize="@dimen/_10ssp"
         android:visibility="gone"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/viewSupporter" />
 
     <androidx.recyclerview.widget.RecyclerView
