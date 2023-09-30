@@ -7,7 +7,7 @@ import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
-class BaseActivity : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity() {
 
     private lateinit var documentReference: DocumentReference
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class ChatActivity : AppCompatActivity() {
+class ChatActivity : BaseActivity() {
     private lateinit var binding: ActivityChatBinding
     private lateinit var receiverUser: User
     private lateinit var chatMessages: ArrayList<ChatMessage>
