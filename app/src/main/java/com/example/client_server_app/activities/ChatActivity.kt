@@ -30,7 +30,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var preferenceManager: PreferenceManager
     private lateinit var database: FirebaseFirestore
-    private lateinit var conversionId: String
+    private var conversionId: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
@@ -154,7 +154,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun UpdateConversion(message: String) {
         var documentReference: DocumentReference =
-            database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).document(conversionId)
+            database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).document(conversionId.toString())
         documentReference.update(
             Constants.KEY_LAST_MESSAGE, message, Constants.KEY_TIMESTAMP, Date()
         )

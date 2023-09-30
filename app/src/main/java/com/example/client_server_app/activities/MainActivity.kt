@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(),ConversionListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         preferenceManager = PreferenceManager(applicationContext)
+        init()
         LoadUserDetails()
         GetToken()
         SetListener()
