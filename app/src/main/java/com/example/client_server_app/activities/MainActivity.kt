@@ -24,7 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.messaging.FirebaseMessaging
 
 
-class MainActivity : AppCompatActivity(),ConversionListener {
+class MainActivity : BaseActivity(), ConversionListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var preferenceManager: PreferenceManager
     private lateinit var conversations: ArrayList<ChatMessage>

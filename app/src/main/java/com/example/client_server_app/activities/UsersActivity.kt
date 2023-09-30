@@ -13,7 +13,7 @@ import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.firestore.FirebaseFirestore
 
-class UsersActivity : AppCompatActivity(), UserListener {
+class UsersActivity : BaseActivity(), UserListener {
     private lateinit var binding: ActivityUsersBinding
     private lateinit var preferenceManager: PreferenceManager
     override fun onCreate(savedInstanceState: Bundle?) {
