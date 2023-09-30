@@ -226,7 +226,11 @@ class ChatActivity : BaseActivity() {
             var documentSnapshot: DocumentSnapshot = task.result.documents.get(0)
             conversionId = documentSnapshot.id
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        LisetenAvailabiltyOfReceiver()
     }
 }
 
