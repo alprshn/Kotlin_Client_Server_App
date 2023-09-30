@@ -21,6 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.Objects
 
 class ChatActivity : BaseActivity() {
     private lateinit var binding: ActivityChatBinding
@@ -85,6 +86,23 @@ class ChatActivity : BaseActivity() {
         )
         binding.chatRecyclerView.adapter = chatAdapter
         database = FirebaseFirestore.getInstance()
+    }
+
+    fun LisetenAvailabiltyOfReceiver() {
+        database.collection(Constants.KEY_COLLECTION_USERS).document(receiverUser.id)
+            .addSnapshotListener { value, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                if (value != null) {
+                    if (value.getLong(Constants.KEY_AVAILABILITY) != null) {
+                        var availability: Int =
+                            Objects.requireNonNull(value.getLong(Constants.KEY_AVAILABILITY))!!
+                                .toInt()
+                        isReceiverAvailable = availability == 1
+                    }
+                }
+            }
     }
 
     private fun GetBitmapFromEncodedString(encodedImage: String): Bitmap {
