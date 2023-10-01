@@ -2,6 +2,7 @@ package com.example.client_server_app.activities
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.DnsResolver
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
@@ -10,6 +11,8 @@ import com.example.client_server_app.adapters.ChatAdapter
 import com.example.client_server_app.databinding.ActivityChatBinding
 import com.example.client_server_app.models.ChatMessage
 import com.example.client_server_app.models.User
+import com.example.client_server_app.network.ApiClient
+import com.example.client_server_app.network.ApiService
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
 import com.google.android.gms.tasks.OnCompleteListener
@@ -20,10 +23,14 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import es.dmoral.toasty.Toasty
+import org.checkerframework.checker.nullness.qual.NonNull
+import retrofit2.Call
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.Objects
+import javax.security.auth.callback.Callback
 
 class ChatActivity : BaseActivity() {
     private lateinit var binding: ActivityChatBinding
@@ -111,6 +118,21 @@ class ChatActivity : BaseActivity() {
                     binding.textAvailability.visibility = View.GONE
                 }
             }
+    }
+
+    private fun sendNotification(messageBody: String) {
+        val apiService = ApiClient.GetClient()?.create(ApiService::class.java)
+        val headers = Constants.getRemoteMsgHeaders()
+
+        apiService?.SendMessage(headers, messageBody)?.enqueue(object : retrofit2.Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                // Hata işlemleri burada yapılabilir
+            }
+        })
     }
 
     private fun showToast(message: String) {
