@@ -24,6 +24,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import es.dmoral.toasty.Toasty
 import org.checkerframework.checker.nullness.qual.NonNull
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -126,7 +129,23 @@ class ChatActivity : BaseActivity() {
 
         apiService?.SendMessage(headers, messageBody)?.enqueue(object : retrofit2.Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
-
+                if (response.isSuccessful) {
+                    try {
+                        if (response.body() != null) {
+                            var responseJson: JSONObject = JSONObject(response.body())
+                            var results: JSONArray = responseJson.getJSONArray("results")
+                            if (responseJson.getInt("failure") == 1) {
+                                var error: JSONObject = results.get(0) as JSONObject
+                                ShowToast(error.getString("error"))
+                                return
+                            }
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                } else {
+                    ShowToast("Error: " + response.code())
+                }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
@@ -135,7 +154,7 @@ class ChatActivity : BaseActivity() {
         })
     }
 
-    private fun showToast(message: String) {
+    private fun ShowToast(message: String) {
         Toasty.info(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
