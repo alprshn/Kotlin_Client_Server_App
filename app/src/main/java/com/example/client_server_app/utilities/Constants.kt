@@ -29,17 +29,17 @@ class Constants {
         const val REMOTE_MSG_DATA = "data"
         const val REMOTE_MSG_REGISTRATION_IDS = "registration_ids"
 
-        var remoteMsgHeaders: HashMap<String, String>? = null
+        var remoteMessageHeaders: HashMap<String, String>? = null
         fun getRemoteMsgHeaders(): HashMap<String, String> {
-            if (remoteMsgHeaders == null) {
-                remoteMsgHeaders = HashMap()
-                remoteMsgHeaders!!.put(
+            if (remoteMessageHeaders == null) {
+                remoteMessageHeaders = HashMap()
+                remoteMessageHeaders!!.put(
                     REMOTE_MSG_AUTHORIZATION,
                     "key=AAAA_q5UAYA:APA91bHLkYrQaY29Y3pX_hfb8qFN3CRu6aE3YEO547MhzIhpYpjjU4byGnmwFhjVDwscdccUWfTObdcgjvmDRK-nQETjx6o09xCvUV7F1ZSX58M9PSlMMTAMH2lG6ez4Yhcz3WFAmfwy"
                 )
-                remoteMsgHeaders!!.put(REMOTE_MSG_CONTENT_TYPE, "application/json")
+                remoteMessageHeaders!!.put(REMOTE_MSG_CONTENT_TYPE, "application/json")
             }
-            return remoteMsgHeaders!!
+            return remoteMessageHeaders!!
         }
 
     }
