@@ -136,6 +136,11 @@ class ChatActivity : BaseActivity() {
                                 .toInt()
                         isReceiverAvailable = availability == 1
                     }
+                    if (receiverUser.image == null) {
+                        receiverUser.image = value.getString(Constants.KEY_IMAGE).toString()
+                        chatAdapter.SetReceiverProfileImage(GetBitmapFromEncodedString(receiverUser.image)!!)
+                        chatAdapter.notifyItemRangeChanged(0, chatMessages.size)
+                    }
                     receiverUser.token = value.getString(Constants.KEY_FCM_TOKEN)!!
                 }
                 if (isReceiverAvailable) {
