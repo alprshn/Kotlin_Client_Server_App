@@ -25,6 +25,10 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.senderId = senderId
     }
 
+    fun SetReceiverProfileImage(bitmap: Bitmap) {
+        receiverProfileImage = bitmap
+    }
+
     inner class SentMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var binding: ItemContainerSentMessageBinding
 
