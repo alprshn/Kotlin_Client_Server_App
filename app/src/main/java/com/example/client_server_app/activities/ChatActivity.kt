@@ -123,7 +123,7 @@ class ChatActivity : BaseActivity() {
         database = FirebaseFirestore.getInstance()
     }
 
-    fun LisetenAvailabiltyOfReceiver() {
+    fun ListenAvailabiltyOfReceiver() {
         database.collection(Constants.KEY_COLLECTION_USERS).document(receiverUser.id)
             .addSnapshotListener { value, error ->
                 if (error != null) {
@@ -307,7 +307,7 @@ class ChatActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        LisetenAvailabiltyOfReceiver()
+        ListenAvailabiltyOfReceiver()
     }
 }
 
