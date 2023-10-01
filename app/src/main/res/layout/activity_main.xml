@@ -70,6 +70,8 @@
             android:overScrollMode="never"
             android:padding="@dimen/_20sdp"
             android:visibility="gone"
+            app:stackFromEnd="true"
+            app:reverseLayout="true"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <ProgressBar
