@@ -85,6 +85,28 @@ class ChatActivity : BaseActivity() {
             conversion.put(Constants.KEY_TIMESTAMP, Date())
             AddConversion(conversion)
         }
+        if (!isReceiverAvailable) {
+            try {
+                var tokens: JSONArray = JSONArray()
+                tokens.put(receiverUser.token)
+
+                var data: JSONObject = JSONObject()
+                data.put(Constants.KEY_USER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
+                data.put(Constants.KEY_NAME, preferenceManager.getString(Constants.KEY_NAME))
+                data.put(
+                    Constants.KEY_FCM_TOKEN,
+                    preferenceManager.getString(Constants.KEY_FCM_TOKEN)
+                )
+                data.put(Constants.KEY_MESSAGE, binding.inputMessage.text.toString())
+
+                var body: JSONObject = JSONObject()
+                body.put(Constants.REMOTE_MSG_DATA, data)
+                body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens)
+
+            } catch (exception: Exception) {
+                ShowToast(exception.message.toString())
+            }
+        }
         binding.inputMessage.text = null
     }
 
