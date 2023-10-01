@@ -115,7 +115,7 @@ class ChatActivity : BaseActivity() {
         preferenceManager = PreferenceManager(applicationContext)
         chatMessages = ArrayList()
         chatAdapter = ChatAdapter(
-            GetBitmapFromEncodedString(receiverUser.image),
+            GetBitmapFromEncodedString(receiverUser.image)!!,
             chatMessages,
             preferenceManager.getString(Constants.KEY_USER_ID).toString()
         )
@@ -182,9 +182,14 @@ class ChatActivity : BaseActivity() {
         Toasty.info(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun GetBitmapFromEncodedString(encodedImage: String): Bitmap {
-        val bytes: ByteArray = Base64.decode(encodedImage, Base64.DEFAULT)
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+    private fun GetBitmapFromEncodedString(encodedImage: String): Bitmap? {
+        if (encodedImage != null) {
+            val bytes: ByteArray = Base64.decode(encodedImage, Base64.DEFAULT)
+            return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+        } else {
+            return null
+        }
+
     }
 
     private fun LoadReceiverDetails() {
