@@ -1,6 +1,8 @@
 package com.example.client_server_app.firebase
 
 import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Build
@@ -48,8 +50,14 @@ class MessagingService : FirebaseMessagingService() {
         builder.setContentIntent(pendingIntent)
         builder.setAutoCancel(true)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            var channelName: CharSequence = "Chat Message"
+            var changeDescription: String =
+                "This notification channel is used for chat message notification"
+            var importance: Int = NotificationManager.IMPORTANCE_DEFAULT
+            var channel: NotificationChannel =
+                NotificationChannel(channelId, channelName, importance)
+            channel.description = changeDescription
         }
 
     }
