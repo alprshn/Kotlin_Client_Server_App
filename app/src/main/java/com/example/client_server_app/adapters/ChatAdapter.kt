@@ -13,11 +13,15 @@ import com.example.client_server_app.models.ChatMessage
 
 class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private lateinit var receiverProfileImage: Bitmap
-    private val chatMessage: List<ChatMessage>
-    private val senderId: String
+    private lateinit var chatMessage: List<ChatMessage>
+    private lateinit var senderId: String
 
     private val VIEW_TYPE_SENT: Int = 1
     private val VIEW_TYPE_RECEIVED: Int = 2
+
+    fun SetReceiverProfileImage(bitmap: Bitmap) {
+        receiverProfileImage = bitmap
+    }
 
     constructor(receiverProfileImage: Bitmap, chatMessage: List<ChatMessage>, senderId: String) {
         this.receiverProfileImage = receiverProfileImage
@@ -25,9 +29,6 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.senderId = senderId
     }
 
-    fun SetReceiverProfileImage(bitmap: Bitmap) {
-        receiverProfileImage = bitmap
-    }
 
     inner class SentMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var binding: ItemContainerSentMessageBinding
