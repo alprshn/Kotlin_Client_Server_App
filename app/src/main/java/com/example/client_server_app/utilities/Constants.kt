@@ -24,6 +24,20 @@ class Constants {
         const val KEY_RECEIVER_IMAGE = "receiverImage"
         const val KEY_LAST_MESSAGE = "lastMessage"
         const val KEY_AVAILABILITY = "availability"
+        const val REMOTE_MSG_AUTHORIZATION = "Authorization"
+        const val REMOTE_MSG_CONTENT_TYPE = "Content-Type"
+        var remoteMsgHeaders: HashMap<String, String>? = null
+        fun getRemoteMsgHeaders(): HashMap<String, String> {
+            if (remoteMsgHeaders == null) {
+                remoteMsgHeaders = HashMap()
+                remoteMsgHeaders!!.put(
+                    REMOTE_MSG_AUTHORIZATION,
+                    "key=AAAA_q5UAYA:APA91bHLkYrQaY29Y3pX_hfb8qFN3CRu6aE3YEO547MhzIhpYpjjU4byGnmwFhjVDwscdccUWfTObdcgjvmDRK-nQETjx6o09xCvUV7F1ZSX58M9PSlMMTAMH2lG6ez4Yhcz3WFAmfwy"
+                )
+                remoteMsgHeaders!!.put(REMOTE_MSG_CONTENT_TYPE, "application/json")
+            }
+            return remoteMsgHeaders!!
+        }
 
     }
 
