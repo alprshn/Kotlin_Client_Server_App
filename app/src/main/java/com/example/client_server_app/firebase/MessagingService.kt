@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.example.client_server_app.R
 import com.example.client_server_app.activities.ChatActivity
 import com.example.client_server_app.activities.MainActivity
@@ -63,7 +64,9 @@ class MessagingService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
-
+        var notificationManagerCompat: NotificationManagerCompat =
+            NotificationManagerCompat.from(this)
+        notificationManagerCompat.notify(notificationId, builder.build())
 
     }
 }
