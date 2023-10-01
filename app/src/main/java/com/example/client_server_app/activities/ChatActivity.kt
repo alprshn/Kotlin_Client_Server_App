@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
+import android.widget.Toast
 import com.example.client_server_app.adapters.ChatAdapter
 import com.example.client_server_app.databinding.ActivityChatBinding
 import com.example.client_server_app.models.ChatMessage
@@ -18,6 +19,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import es.dmoral.toasty.Toasty
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -109,6 +111,10 @@ class ChatActivity : BaseActivity() {
                     binding.textAvailability.visibility = View.GONE
                 }
             }
+    }
+
+    private fun showToast(message: String) {
+        Toasty.info(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun GetBitmapFromEncodedString(encodedImage: String): Bitmap {
