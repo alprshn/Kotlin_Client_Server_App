@@ -101,6 +101,7 @@ class ChatActivity : BaseActivity() {
                                 .toInt()
                         isReceiverAvailable = availability == 1
                     }
+                    receiverUser.token = value.getString(Constants.KEY_FCM_TOKEN)!!
                 }
                 if (isReceiverAvailable) {
                     binding.textAvailability.visibility = View.VISIBLE
