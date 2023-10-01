@@ -150,7 +150,7 @@ class ChatActivity : BaseActivity() {
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-                // Hata işlemleri burada yapılabilir
+                ShowToast(t.message.toString())
             }
         })
     }
