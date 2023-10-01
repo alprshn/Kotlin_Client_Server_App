@@ -103,6 +103,7 @@ class ChatActivity : BaseActivity() {
                 body.put(Constants.REMOTE_MSG_DATA, data)
                 body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens)
 
+                SendNotification(body.toString())
             } catch (exception: Exception) {
                 ShowToast(exception.message.toString())
             }
@@ -145,7 +146,7 @@ class ChatActivity : BaseActivity() {
             }
     }
 
-    private fun sendNotification(messageBody: String) {
+    private fun SendNotification(messageBody: String) {
         val apiService = ApiClient.GetClient()?.create(ApiService::class.java)
         val headers = Constants.getRemoteMsgHeaders()
 
