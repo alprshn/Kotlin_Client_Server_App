@@ -143,6 +143,7 @@ class ChatActivity : BaseActivity() {
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
+                    ShowToast("Notification Sent Successfully")
                 } else {
                     ShowToast("Error: " + response.code())
                 }
