@@ -58,7 +58,12 @@ class MessagingService : FirebaseMessagingService() {
             var channel: NotificationChannel =
                 NotificationChannel(channelId, channelName, importance)
             channel.description = changeDescription
+            var notificationManager: NotificationManager =
+                getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
         }
+
+
 
     }
 }
