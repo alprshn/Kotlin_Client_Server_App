@@ -88,7 +88,7 @@ class SignInActivity : AppCompatActivity() {
                 var user: FirebaseUser = mAuth.currentUser!!
                 IsVerified()
             } else {
-                ShowToast("Invalid email Or Password")
+                ShowToast("Invalid Email Or Password")
             }
         }
     }
