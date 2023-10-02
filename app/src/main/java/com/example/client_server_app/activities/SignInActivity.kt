@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.client_server_app.databinding.ActivitySignInBinding
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import es.dmoral.toasty.Toasty
@@ -16,6 +18,8 @@ import es.dmoral.toasty.Toasty
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
     private lateinit var preferenceManager: PreferenceManager
+    private var mAuth = FirebaseAuth.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
@@ -38,11 +42,12 @@ class SignInActivity : AppCompatActivity() {
         }
         binding.buttonSignIn.setOnClickListener { v ->
             if (IsValidSignInDetails()) {
-                SignIn()
+                EmailVerification(
+                    binding.inputEmail.text.toString().trim(),
+                    binding.inputPassword.text.toString().trim()
+                )
             }
         }
-
-
     }
 
     fun SignIn() {
@@ -75,6 +80,26 @@ class SignInActivity : AppCompatActivity() {
 
             }
 
+    }
+
+    fun EmailVerification(email: String, password: String) {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                var user: FirebaseUser = mAuth.currentUser!!
+                IsVerified()
+            } else {
+                ShowToast("Invalid email Or Password")
+            }
+        }
+    }
+
+    fun IsVerified() {
+        var firebaseUser: FirebaseUser? = mAuth.currentUser
+        if (firebaseUser?.isEmailVerified == true) {
+            SignIn()
+        } else {
+            ShowToast("Your Account Is Not Verified")
+        }
     }
 
     private fun Loading(isLoading: Boolean) {

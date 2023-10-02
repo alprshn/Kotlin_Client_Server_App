@@ -7,41 +7,29 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Email
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.client_server_app.R
 import com.example.client_server_app.databinding.ActivitySignUpBinding
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.common.base.Verify
-import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import es.dmoral.toasty.Toasty
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
-import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var encodedImage: String
     private lateinit var preferenceManager: PreferenceManager
-    var auth = FirebaseAuth.getInstance()
-    val user = auth.currentUser
+    private var auth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -58,8 +46,8 @@ class SignUpActivity : AppCompatActivity() {
         binding.buttonSignUp.setOnClickListener { v ->
             if (IsValidSignUpDetails()) {
                 VerifyEmailAccount(
-                    binding.inputEmail.text.toString(),
-                    binding.inputPassword.text.toString()
+                    binding.inputEmail.text.toString().trim(),
+                    binding.inputPassword.text.toString().trim()
                 )
             }
         }
@@ -78,25 +66,16 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun VerifyEmailAccount(email: String, password: String) {
         Loading(true)
-
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
 
                 if (task.isSuccessful) {
                     auth.currentUser?.sendEmailVerification()?.addOnCompleteListener {
                         ShowToast("Sending Email")
-
-                        auth.currentUser?.reload()?.addOnCompleteListener { reloadTask ->
-                            if (reloadTask.isSuccessful) {
-                                val user = auth.currentUser
-                                if (user != null && user.isEmailVerified) {
-                                    // E-posta doğrulama başarılı, yeni aktiviteyi başlat
-                                    Loading(false)
-                                    SignUp()
-                                }
-                            }
-
-                        }
+                        SignUp()
+                        val intent = Intent(this, SignInActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     }
                 } else {
                     Log.e("DENEME", "Error signing in with email link", task.exception)
@@ -104,17 +83,6 @@ class SignUpActivity : AppCompatActivity() {
             }
     }
 
-    fun getActionCodeSettings(): ActionCodeSettings {
-        return ActionCodeSettings.newBuilder()
-            .setUrl("alper.page.link")
-            .setHandleCodeInApp(true)
-            .setAndroidPackageName(
-                "com.example.client_server_app", // Android uygulama paket adınız
-                true, // Play Store'da uygulama mevcutsa paket adını kullan
-                "24" // Minimum uygulama sürümü
-            )
-            .build()
-    }
 
     private fun SignUp() {
         Loading(true)
@@ -131,18 +99,11 @@ class SignUpActivity : AppCompatActivity() {
                 preferenceManager.PutString(Constants.KEY_USER_ID, documentReference.id)
                 preferenceManager.PutString(Constants.KEY_NAME, binding.inputName.text.toString())
                 preferenceManager.PutString(Constants.KEY_IMAGE, encodedImage)
-                val intent = Intent(this, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                startActivity(intent)
-
-
             }
             .addOnFailureListener { exception ->
                 Loading(false)
                 exception.message?.let { ShowToast(it) }
             }
-
-
     }
 
     private fun IsValidSignUpDetails(): Boolean {
