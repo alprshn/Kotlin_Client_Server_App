@@ -95,7 +95,7 @@ class SignUpActivity : AppCompatActivity() {
         database.collection(Constants.KEY_COLLECTION_USERS).add(user)
             .addOnSuccessListener { documentReference ->
                 Loading(false)
-                preferenceManager.PutBoolean(Constants.KEY_IS_SIGNED_IN, true)
+                preferenceManager.PutBoolean(Constants.KEY_IS_SIGNED_IN, false)
                 preferenceManager.PutString(Constants.KEY_USER_ID, documentReference.id)
                 preferenceManager.PutString(Constants.KEY_NAME, binding.inputName.text.toString())
                 preferenceManager.PutString(Constants.KEY_IMAGE, encodedImage)
