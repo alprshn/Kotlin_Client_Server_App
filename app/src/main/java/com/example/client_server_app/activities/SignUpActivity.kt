@@ -27,7 +27,7 @@ import java.io.InputStream
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
-    private lateinit var encodedImage: String
+    private var encodedImage: String = ""
     private lateinit var preferenceManager: PreferenceManager
     private var auth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,7 +107,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun IsValidSignUpDetails(): Boolean {
-        if (encodedImage == null) {
+        if (encodedImage == "") {
             ShowToast("Select Profile Image")
             return false
         } else if (binding.inputName.text.toString().trim().isEmpty()) {
