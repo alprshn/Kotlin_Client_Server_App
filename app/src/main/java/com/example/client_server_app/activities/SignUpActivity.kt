@@ -71,7 +71,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 if (task.isSuccessful) {
                     auth.currentUser?.sendEmailVerification()?.addOnCompleteListener {
-                        ShowToast("Sending Email")
+                        ShowToast("Please Check Your Email For Verification")
                         SignUp()
                         val intent = Intent(this, SignInActivity::class.java)
                         startActivity(intent)
