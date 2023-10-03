@@ -1,13 +1,15 @@
 package com.example.client_server_app.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.client_server_app.adapters.RecentConversationsAdapter
 import com.example.client_server_app.databinding.ActivityMainBinding
 import com.example.client_server_app.listeners.ConversionListener
@@ -42,6 +44,7 @@ class MainActivity : BaseActivity(), ConversionListener {
         GetToken()
         SetListener()
         ListenConversations()
+        NotificationPermission()
     }
 
     private fun init() {
@@ -184,5 +187,13 @@ class MainActivity : BaseActivity(), ConversionListener {
         val intent = Intent(applicationContext, ChatActivity::class.java)
         intent.putExtra(Constants.KEY_USER, user)
         startActivity(intent)
+    }
+
+    fun NotificationPermission(){
+        if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.POST_NOTIFICATIONS) ==PackageManager.PERMISSION_GRANTED){
+            requestPermissions(arrayOf("android.permission.POST_NOTIFICATIONS"),80)
+
+        }
+
     }
 }
