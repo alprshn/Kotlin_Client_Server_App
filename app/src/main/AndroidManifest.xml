@@ -15,9 +15,6 @@
         android:theme="@style/Theme.Client_Server_App"
         tools:targetApi="31">
         <activity
-            android:name=".activities.VerifyActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.ChatActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
