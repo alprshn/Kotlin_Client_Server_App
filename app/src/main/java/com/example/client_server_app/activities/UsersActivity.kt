@@ -29,6 +29,7 @@ class UsersActivity : BaseActivity(), UserListener {
         SetListeners()
         Log.e("Hata", "Hata20")
         GetUsers()
+        Search()
     }
 
     private fun SetListeners() {
@@ -116,8 +117,7 @@ class UsersActivity : BaseActivity(), UserListener {
 
     fun filter(text: String) {
         var filteredList: ArrayList<User> = ArrayList()
-        var filterUser: User
-        for (filterUser in users) {
+        for (filterUser: User in users) {
             if (filterUser.email.toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(filterUser)
             }
