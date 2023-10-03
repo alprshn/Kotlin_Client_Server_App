@@ -7,7 +7,10 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
+import android.util.Base64
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -27,6 +30,7 @@ class MessagingService : FirebaseMessagingService() {
 
     }
 
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         var user: User = User()
@@ -36,13 +40,11 @@ class MessagingService : FirebaseMessagingService() {
 
         var notificationId: Int = java.util.Random().nextInt()
         var channelId: String = "chat_message"
-
         val intent = Intent(this, ChatActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         intent.putExtra(Constants.KEY_USER, user)
         var pendingIntent: PendingIntent =
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-
         var builder: NotificationCompat.Builder = NotificationCompat.Builder(this, channelId)
         builder.setSmallIcon(R.drawable.ic_notification)
         builder.setContentTitle(user.name)
@@ -50,7 +52,7 @@ class MessagingService : FirebaseMessagingService() {
         builder.setStyle(
             NotificationCompat.BigTextStyle().bigText(remoteMessage.data.get(Constants.KEY_MESSAGE))
         )
-        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        builder.setPriority(NotificationCompat.PRIORITY_HIGH)
         builder.setContentIntent(pendingIntent)
         builder.setAutoCancel(true)
 
