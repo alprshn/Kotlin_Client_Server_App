@@ -117,12 +117,13 @@ class UsersActivity : BaseActivity(), UserListener {
 
     fun filter(text: String) {
         var filteredList: ArrayList<User> = ArrayList()
+
         for (filterUser: User in users) {
             if (filterUser.email.toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(filterUser)
             }
         }
-        val usersAdapter = UsersAdapter(users, this)
         usersAdapter.filterList(filteredList)
     }
+
 }
