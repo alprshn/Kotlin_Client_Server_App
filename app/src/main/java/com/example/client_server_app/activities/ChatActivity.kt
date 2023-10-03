@@ -318,24 +318,6 @@ class ChatActivity : BaseActivity() {
         ListenAvailabiltyOfReceiver()
     }
 
-    fun Search() {
-        binding.searchBar.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Değişiklik öncesinde yapılacak işlemler
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Değişiklik anında yapılacak işlemler
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                filter(s.toString())
-            }
-        })
-    }
-
-    fun filter(text: String) {
-
-    }
+    
 }
 

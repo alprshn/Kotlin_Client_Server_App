@@ -14,7 +14,7 @@ class UsersAdapter(private val users: List<User>, private var userListener: User
     RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var binding: ItemContainerUserBinding
-
+        private lateinit var userList: MutableList<User>
         constructor(itemContainerUserBinding: ItemContainerUserBinding) : this(
             itemContainerUserBinding.root
         ) {
@@ -47,6 +47,11 @@ class UsersAdapter(private val users: List<User>, private var userListener: User
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.SetUserData(users.get(position))
+    }
+
+    fun filterList(filteredList: ArrayList<User>) {
+        mExampleList = filteredList;
+        notifyDataSetChanged();
     }
 
 }

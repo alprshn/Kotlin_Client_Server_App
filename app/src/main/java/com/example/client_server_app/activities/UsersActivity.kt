@@ -3,6 +3,8 @@ package com.example.client_server_app.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import com.example.client_server_app.adapters.UsersAdapter
@@ -16,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class UsersActivity : BaseActivity(), UserListener {
     private lateinit var binding: ActivityUsersBinding
     private lateinit var preferenceManager: PreferenceManager
+    private lateinit var users: MutableList<User>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUsersBinding.inflate(layoutInflater)
@@ -34,24 +37,16 @@ class UsersActivity : BaseActivity(), UserListener {
     private fun GetUsers() {
         Loading(true)
         var database: FirebaseFirestore = FirebaseFirestore.getInstance()
-        Log.e("Hata", "Hata18")
+
         database.collection(Constants.KEY_COLLECTION_USERS).get().addOnCompleteListener { task ->
             Loading(false)
-            Log.e("Hata", "Hata17")
             var currentUserId = preferenceManager.getString(Constants.KEY_USER_ID)
-            Log.e("Hata", "Hata16")
             if (task.isSuccessful() && task.getResult() != null) {
-                Log.e("Hata", "Hata15")
-                var users: MutableList<User> = ArrayList()
-                Log.e("Hata", "Hata14")
+                users = ArrayList()
                 val queryDocumentSnapShots = task.result
-                Log.e("Hata", "Hata13")
                 for (queryDocumentSnapShot in queryDocumentSnapShots) {
-                    Log.e("Hata", "Hata12")
                     if (currentUserId.equals(queryDocumentSnapShot.id)) {
-                        Log.e("Hata", "Hata11")
                         continue
-                        Log.e("Hata", "Hata1")
                     }
                     val user = User()
                     Log.e("Hata", "Hata2")
@@ -81,9 +76,7 @@ class UsersActivity : BaseActivity(), UserListener {
 
     private fun ShowErrorMessage() {
         binding.textErrorMessage.text = String.format("%s", "No User Available")
-        Log.e("Hata", "Hata7")
         binding.textErrorMessage.visibility = View.VISIBLE
-        Log.e("Hata", "Hata8")
     }
 
     private fun Loading(isLoading: Boolean) {
@@ -102,5 +95,33 @@ class UsersActivity : BaseActivity(), UserListener {
         intent.putExtra(Constants.KEY_USER, user)
         startActivity(intent)
         finish()
+    }
+
+    fun Search() {
+        binding.searchBar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Değişiklik öncesinde yapılacak işlemler
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Değişiklik anında yapılacak işlemler
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                filter(s.toString())
+            }
+        })
+    }
+
+    fun filter(text: String) {
+        var filteredList: ArrayList<User> = ArrayList()
+        var filterUser: User
+        for (filterUser in users) {
+            if (filterUser.email.toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(filterUser)
+            }
+        }
+        val usersAdapter = UsersAdapter(users, this)
+        usersAdapter.filterlis
     }
 }
