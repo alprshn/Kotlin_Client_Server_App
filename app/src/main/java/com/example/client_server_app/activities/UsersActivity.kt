@@ -19,6 +19,7 @@ class UsersActivity : BaseActivity(), UserListener {
     private lateinit var binding: ActivityUsersBinding
     private lateinit var preferenceManager: PreferenceManager
     private lateinit var users: MutableList<User>
+    private lateinit var usersAdapter: UsersAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUsersBinding.inflate(layoutInflater)
@@ -59,7 +60,7 @@ class UsersActivity : BaseActivity(), UserListener {
                     Log.e("Hata", "Hata3")
                 }
                 if (users.size > 0) {
-                    val usersAdapter = UsersAdapter(users, this)
+                    usersAdapter = UsersAdapter(users, this)
                     binding.usersRecyclerView.adapter = usersAdapter
                     Log.e("Hata", "Hata4")
                     binding.usersRecyclerView.visibility = View.VISIBLE
@@ -117,11 +118,11 @@ class UsersActivity : BaseActivity(), UserListener {
         var filteredList: ArrayList<User> = ArrayList()
         var filterUser: User
         for (filterUser in users) {
-            if (filterUser.email.toLowerCase().contains(text.toLowerCase())){
+            if (filterUser.email.toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(filterUser)
             }
         }
         val usersAdapter = UsersAdapter(users, this)
-        usersAdapter.filterlis
+        usersAdapter.filterList(filteredList)
     }
 }
