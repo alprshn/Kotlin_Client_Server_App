@@ -1,5 +1,6 @@
 package com.example.client_server_app.activities
 
+import android.Manifest.permission.POST_NOTIFICATIONS
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -44,15 +45,14 @@ class MainActivity : BaseActivity(), ConversionListener {
         init()
         LoadUserDetails()
         GetToken()
+
+        if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, arrayOf("android.permission.POST_NOTIFICATIONS"), 1)
+        }
+
         SetListener()
         ListenConversations()
 
-        var permissionState = ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS);
-        // If the permission is not granted, request it.
-        if (permissionState == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(this,
-                arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1);
-        }
 
     }
 
