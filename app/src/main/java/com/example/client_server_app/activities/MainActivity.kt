@@ -45,15 +45,9 @@ class MainActivity : BaseActivity(), ConversionListener {
         init()
         LoadUserDetails()
         GetToken()
-
-        if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(this, arrayOf("android.permission.POST_NOTIFICATIONS"), 1)
-        }
-
+        NotificationPermission()
         SetListener()
         ListenConversations()
-
-
     }
 
     private fun init() {
@@ -198,10 +192,17 @@ class MainActivity : BaseActivity(), ConversionListener {
         startActivity(intent)
     }
 
-    fun NotificationPermission(){
-        if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.POST_NOTIFICATIONS) ==PackageManager.PERMISSION_GRANTED){
-            requestPermissions(arrayOf("android.permission.POST_NOTIFICATIONS"),80)
+    fun NotificationPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_DENIED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf("android.permission.POST_NOTIFICATIONS"),
+                1
+            )
         }
-
     }
 }
