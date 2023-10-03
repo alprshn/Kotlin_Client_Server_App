@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.util.Base64
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.client_server_app.adapters.RecentConversationsAdapter
 import com.example.client_server_app.databinding.ActivityMainBinding
@@ -44,7 +46,14 @@ class MainActivity : BaseActivity(), ConversionListener {
         GetToken()
         SetListener()
         ListenConversations()
-        NotificationPermission()
+
+        var permissionState = ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS);
+        // If the permission is not granted, request it.
+        if (permissionState == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1);
+        }
+
     }
 
     private fun init() {
@@ -192,7 +201,6 @@ class MainActivity : BaseActivity(), ConversionListener {
     fun NotificationPermission(){
         if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.POST_NOTIFICATIONS) ==PackageManager.PERMISSION_GRANTED){
             requestPermissions(arrayOf("android.permission.POST_NOTIFICATIONS"),80)
-
         }
 
     }
