@@ -4,9 +4,12 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.DnsResolver
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Base64
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.example.client_server_app.adapters.ChatAdapter
 import com.example.client_server_app.databinding.ActivityChatBinding
 import com.example.client_server_app.models.ChatMessage
@@ -313,6 +316,26 @@ class ChatActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         ListenAvailabiltyOfReceiver()
+    }
+
+    fun Search() {
+        binding.searchBar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Değişiklik öncesinde yapılacak işlemler
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Değişiklik anında yapılacak işlemler
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                filter(s.toString())
+            }
+        })
+    }
+
+    fun filter(text: String) {
+
     }
 }
 
