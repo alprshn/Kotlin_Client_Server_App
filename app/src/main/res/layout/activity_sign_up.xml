@@ -37,7 +37,7 @@
                 android:layout_height="@dimen/_80sdp"
                 android:background="@drawable/background_image"
                 android:scaleType="centerCrop"
-                app:riv_oval="true" />
+                app:riv_oval="true"/>
 
             <TextView
                 android:id="@+id/textAddImage"
@@ -93,20 +93,21 @@
             android:paddingEnd="@dimen/_16sdp"
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp"
-             />
+            />
 
-        <nu.aaro.gustav.passwordstrengthmeter.PasswordStrengthMeter
-            android:id="@+id/passwordInputMeter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp"
-            android:visibility="gone"
-            app:animateChanges="true"
-            app:animationDuration="300"
-            app:labelTextSize="12sp"
-            app:showStrengthBar="true"
-            app:showStrengthLabel="true"
-            app:strengthBarHeight="5dp" />
+            <nu.aaro.gustav.passwordstrengthmeter.PasswordStrengthMeter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/passwordInputMeter"
+                app:strengthBarHeight="5dp"
+                app:animateChanges="true"
+                app:showStrengthLabel="true"
+                app:showStrengthBar="true"
+                app:animationDuration="300"
+                app:labelTextSize="12sp"
+                android:visibility="gone"
+                android:layout_margin="@dimen/_5sdp"
+                />
 
         <EditText
             android:id="@+id/inputConfirmPassword"
@@ -146,7 +147,7 @@
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
-                android:visibility="invisible" />
+                android:visibility="invisible"/>
         </FrameLayout>
 
 
