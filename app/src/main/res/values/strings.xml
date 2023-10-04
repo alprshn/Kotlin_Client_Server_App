@@ -3,4 +3,7 @@
     <string name="select_users">Select Users</string>
     <string name="type_a_message">Type A Message</string>
     <string name="online">Online</string>
+    <string name="please_search_email">Please Search Email</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
 </resources>

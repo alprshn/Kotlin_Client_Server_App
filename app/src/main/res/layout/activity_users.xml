@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/imageBack"
         android:background="@drawable/background_chat_input"
         android:backgroundTint="@color/white"
-        android:hint="Please Search Email"
+        android:hint="@string/please_search_email"
         />
 
     <FrameLayout

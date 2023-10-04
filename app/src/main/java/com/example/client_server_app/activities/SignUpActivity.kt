@@ -37,7 +37,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
         preferenceManager = PreferenceManager(applicationContext)
         SetListener()
-
+        StrengthPasswordMeter()
     }
 
 
@@ -156,11 +156,18 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun StrengthPasswordMeter(){
+    private fun StrengthPasswordMeter() {
         var meter: PasswordStrengthMeter = binding.passwordInputMeter
         meter.setEditText(binding.inputPassword)
-
+        binding.inputPassword.setOnFocusChangeListener{_,hasFocus ->
+            if (hasFocus) {
+                binding.passwordInputMeter.visibility = View.VISIBLE
+            } else {
+                binding.passwordInputMeter.visibility = View.GONE
+            }
+        }
     }
+
     private fun EncodeImage(bitMap: Bitmap): String {
         var previewWidth: Int = 150
         var previewHeight: Int = bitMap.height * previewWidth / bitMap.width

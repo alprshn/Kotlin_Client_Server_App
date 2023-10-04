@@ -85,16 +85,14 @@
             android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/background_input"
-            android:hint="Password"
+            android:hint="@string/password"
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:paddingStart="@dimen/_16sdp"
             android:paddingEnd="@dimen/_16sdp"
             android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"/>
+            android:textSize="@dimen/_13ssp" />
 
             <nu.aaro.gustav.passwordstrengthmeter.PasswordStrengthMeter
                 android:layout_width="match_parent"
@@ -106,7 +104,8 @@
                 app:showStrengthBar="true"
                 app:animationDuration="300"
                 app:labelTextSize="12sp"
-
+                android:visibility="gone"
+                android:layout_margin="@dimen/_5sdp"
                 />
         
         <EditText
@@ -115,7 +114,7 @@
             android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/background_input"
-            android:hint="Confirm Password"
+            android:hint="@string/confirm_password"
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="textPassword"
