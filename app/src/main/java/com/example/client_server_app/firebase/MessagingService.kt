@@ -5,6 +5,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -43,12 +44,12 @@ class MessagingService : FirebaseMessagingService() {
         val intent = Intent(this, ChatActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         intent.putExtra(Constants.KEY_USER, user)
-        var pendingIntent: PendingIntent =
-            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        var pendingIntent: PendingIntent = PendingIntent.getActivity(applicationContext, 1, intent,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)PendingIntent.FLAG_IMMUTABLE else 0)
+
         var builder: NotificationCompat.Builder = NotificationCompat.Builder(this, channelId)
         builder.setSmallIcon(R.drawable.ic_notification)
         builder.setContentTitle(user.name)
-        Log.e("Image", user.image)
         builder.setContentText(remoteMessage.data.get(Constants.KEY_MESSAGE))
         builder.setStyle(
             NotificationCompat.BigTextStyle().bigText(remoteMessage.data.get(Constants.KEY_MESSAGE))

@@ -71,15 +71,15 @@ class ChatActivity : BaseActivity() {
             var conversion: HashMap<String, Any> = HashMap()
             conversion.put(
                 Constants.KEY_SENDER_ID,
-                preferenceManager.getString(Constants.KEY_USER_ID)!!
+                preferenceManager.getString(Constants.KEY_USER_ID).toString()
             )
             conversion.put(
                 Constants.KEY_SENDER_NAME,
-                preferenceManager.getString(Constants.KEY_NAME)!!
+                preferenceManager.getString(Constants.KEY_NAME).toString()
             )
             conversion.put(
                 Constants.KEY_SENDER_IMAGE,
-                preferenceManager.getString(Constants.KEY_IMAGE)!!
+                preferenceManager.getString(Constants.KEY_IMAGE).toString()
             )
             conversion.put(Constants.KEY_RECEIVER_ID, receiverUser.id)
             conversion.put(Constants.KEY_RECEIVER_NAME, receiverUser.name)
@@ -101,7 +101,6 @@ class ChatActivity : BaseActivity() {
                     preferenceManager.getString(Constants.KEY_FCM_TOKEN)
                 )
                 data.put(Constants.KEY_MESSAGE, binding.inputMessage.text.toString())
-
                 var body: JSONObject = JSONObject()
                 body.put(Constants.REMOTE_MSG_DATA, data)
                 body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens)
@@ -118,7 +117,7 @@ class ChatActivity : BaseActivity() {
         preferenceManager = PreferenceManager(applicationContext)
         chatMessages = ArrayList()
         chatAdapter = ChatAdapter(
-            GetBitmapFromEncodedString(receiverUser.image)!!,
+            GetBitmapFromEncodedString(receiverUser.image),
             chatMessages,
             preferenceManager.getString(Constants.KEY_USER_ID).toString()
         )

@@ -12,7 +12,7 @@ import com.example.client_server_app.models.ChatMessage
 
 
 class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private lateinit var receiverProfileImage: Bitmap
+    private var receiverProfileImage: Bitmap? = null
     private lateinit var chatMessage: List<ChatMessage>
     private lateinit var senderId: String
 
@@ -23,7 +23,7 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         receiverProfileImage = bitmap
     }
 
-    constructor(receiverProfileImage: Bitmap, chatMessage: List<ChatMessage>, senderId: String) {
+    constructor(receiverProfileImage: Bitmap?, chatMessage: List<ChatMessage>, senderId: String) {
         this.receiverProfileImage = receiverProfileImage
         this.chatMessage = chatMessage
         this.senderId = senderId
@@ -55,7 +55,7 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
             binding = itemContainerReceivedMessageBinding
         }
 
-        fun SetData(chatMessage: ChatMessage, receiverProfileImage: Bitmap) {
+        fun SetData(chatMessage: ChatMessage, receiverProfileImage: Bitmap?) {
             binding.textMessage.text = chatMessage.message
             binding.textDateTime.text = chatMessage.dateTime
             if (receiverProfileImage != null) {
