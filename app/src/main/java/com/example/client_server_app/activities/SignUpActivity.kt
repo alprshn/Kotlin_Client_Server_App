@@ -123,8 +123,8 @@ class SignUpActivity : AppCompatActivity() {
         } else if (binding.inputPassword.text.toString().trim().isEmpty()) {
             ShowToast("Enter Password")
             return false
-        } else if (binding.inputPassword.text.toString().trim().isEmpty()) {
-            ShowToast("Enter Password")
+        } else if (binding.inputPassword.text.toString().length <= 7) {
+            ShowToast("Password Too Short")
             return false
         } else if (binding.inputConfirmPassword.text.toString().trim().isEmpty()) {
             ShowToast("Confirm Your Password")
