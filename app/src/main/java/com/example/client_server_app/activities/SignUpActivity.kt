@@ -20,6 +20,7 @@ import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import es.dmoral.toasty.Toasty
+import nu.aaro.gustav.passwordstrengthmeter.PasswordStrengthMeter
 import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -155,6 +156,11 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    private fun StrengthPasswordMeter(){
+        var meter: PasswordStrengthMeter = binding.passwordInputMeter
+        meter.setEditText(binding.inputPassword)
+
+    }
     private fun EncodeImage(bitMap: Bitmap): String {
         var previewWidth: Int = 150
         var previewHeight: Int = bitMap.height * previewWidth / bitMap.width

@@ -92,9 +92,21 @@
             android:paddingStart="@dimen/_16sdp"
             android:paddingEnd="@dimen/_16sdp"
             android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp" />
+            android:textSize="@dimen/_13ssp"
+            android:focusable="true"/>
 
-
+            <nu.aaro.gustav.passwordstrengthmeter.PasswordStrengthMeter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/passwordInputMeter"
+                app:strengthBarHeight="5dp"
+                app:animateChanges="true"
+                app:showStrengthLabel="true"
+                app:showStrengthBar="true"
+                app:animationDuration="300"
+                app:labelTextSize="12sp"
+                />
+        
         <EditText
             android:id="@+id/inputConfirmPassword"
             android:layout_width="match_parent"
