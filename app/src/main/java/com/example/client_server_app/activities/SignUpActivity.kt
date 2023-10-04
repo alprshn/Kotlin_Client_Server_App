@@ -79,7 +79,7 @@ class SignUpActivity : AppCompatActivity() {
                         finish()
                     }
                 } else {
-                    Log.e("DENEME", "Error signing in with email link", task.exception)
+                    ShowToast("Password Too Short")
                 }
             }
     }
@@ -123,6 +123,9 @@ class SignUpActivity : AppCompatActivity() {
         } else if (binding.inputPassword.text.toString().trim().isEmpty()) {
             ShowToast("Enter Password")
             return false
+        } else if (binding.inputPassword.text.toString().trim().isEmpty()) {
+            ShowToast("Enter Password")
+            return false
         } else if (binding.inputConfirmPassword.text.toString().trim().isEmpty()) {
             ShowToast("Confirm Your Password")
             return false
@@ -158,8 +161,9 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun StrengthPasswordMeter() {
         var meter: PasswordStrengthMeter = binding.passwordInputMeter
+
         meter.setEditText(binding.inputPassword)
-        binding.inputPassword.setOnFocusChangeListener{_,hasFocus ->
+        binding.inputPassword.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 binding.passwordInputMeter.visibility = View.VISIBLE
             } else {
