@@ -48,6 +48,7 @@ class MessagingService : FirebaseMessagingService() {
         var builder: NotificationCompat.Builder = NotificationCompat.Builder(this, channelId)
         builder.setSmallIcon(R.drawable.ic_notification)
         builder.setContentTitle(user.name)
+        Log.e("Image", user.image)
         builder.setContentText(remoteMessage.data.get(Constants.KEY_MESSAGE))
         builder.setStyle(
             NotificationCompat.BigTextStyle().bigText(remoteMessage.data.get(Constants.KEY_MESSAGE))
