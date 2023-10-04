@@ -20,7 +20,6 @@ import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import es.dmoral.toasty.Toasty
-import nu.aaro.gustav.passwordstrengthmeter.PasswordStrengthCalculator
 import nu.aaro.gustav.passwordstrengthmeter.PasswordStrengthMeter
 import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
@@ -160,25 +159,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun StrengthPasswordMeter() {
         var meter: PasswordStrengthMeter = binding.passwordInputMeter
         meter.setEditText(binding.inputPassword)
-        meter.setPasswordStrengthCalculator(object : PasswordStrengthCalculator {
-            override fun calculatePasswordSecurityLevel(password: String?): Int {
-                return
-            }
-
-            override fun getMinimumLength(): Int {
-                return 6
-            }
-
-            override fun passwordAccepted(level: Int): Boolean {
-                return level > 2
-            }
-
-            override fun onPasswordAccepted(password: String?) {
-                TODO("Not yet implemented")
-            }
-
-        })
-        binding.inputPassword.setOnFocusChangeListener { _, hasFocus ->
+        binding.inputPassword.setOnFocusChangeListener{_,hasFocus ->
             if (hasFocus) {
                 binding.passwordInputMeter.visibility = View.VISIBLE
             } else {
