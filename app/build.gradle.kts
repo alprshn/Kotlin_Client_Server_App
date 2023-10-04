@@ -88,5 +88,5 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")
 
     //Strength Password Meter
-    implementation("com.ihaydin.passwordmeter:PasswordMeter:1.0.0")
+    implementation("nu.aaro.gustav:passwordstrengthmeter:0.4")
 }

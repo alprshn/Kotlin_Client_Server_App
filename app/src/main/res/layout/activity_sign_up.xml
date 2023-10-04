@@ -94,6 +94,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp" />
 
+
         <EditText
             android:id="@+id/inputConfirmPassword"
             android:layout_width="match_parent"
