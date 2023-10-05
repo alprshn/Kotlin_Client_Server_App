@@ -41,7 +41,6 @@ class SignInActivity : AppCompatActivity() {
         SetListener()
     }
 
-
     /**
      *
      * The SetListener function listen all sign-in click event and has all click event
@@ -70,6 +69,12 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     *
+     * The SetListener function listen all sign-in click event and has all click event
+     *
+     * The SetListener function is inside the onCreate function.
+     */
     fun SignIn() {
         Loading(true)
         var database: FirebaseFirestore = FirebaseFirestore.getInstance()
