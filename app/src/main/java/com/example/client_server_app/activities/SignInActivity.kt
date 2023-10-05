@@ -14,7 +14,15 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import es.dmoral.toasty.Toasty
-
+/**
+ *
+ * This class for activity sign-in
+ *
+ * This activity manage user sign-in logic.
+ * This activity manage activity_sign_in.xml file
+ * @property SignInActivity the name of this class.
+ *
+ */
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
     private lateinit var preferenceManager: PreferenceManager
@@ -30,14 +38,23 @@ class SignInActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        setListener()
+        SetListener()
     }
 
 
-    //Giriş Yapma Sayfasına geçiş fonksiyonu
-    private fun setListener() {
+    /**
+     *
+     * The SetListener function listen all sign-in click event and has all click event
+     *
+     * The SetListener function is inside the onCreate function.
+     */
+    private fun SetListener() {
+        //binding.textCreateNewAccount is if you have not Account you can click and you can sign up
         binding.textCreateNewAccount.setOnClickListener {
+            // Creating new Intent object.
+            //Intent object for communication witch each other different activity
             val intent = Intent(this, SignUpActivity::class.java)
+
             startActivity(intent)
         }
         binding.buttonSignIn.setOnClickListener { v ->
