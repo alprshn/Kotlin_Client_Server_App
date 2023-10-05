@@ -54,12 +54,15 @@ class SignInActivity : AppCompatActivity() {
             // Creating new Intent object.
             //Intent object for communication witch each other different activity
             val intent = Intent(this, SignUpActivity::class.java)
-
+            //startActivity starts the target activity
             startActivity(intent)
         }
+        //binding.buttonSignIn.setOnClickListener listens click event and start sign-in
         binding.buttonSignIn.setOnClickListener { v ->
+            // If does IsValidSignInDetails() function equals true starts email verification function
             if (IsValidSignInDetails()) {
                 EmailVerification(
+                    //Takes the email and password datas from edit text. EmailVerification() function use the email and password datas
                     binding.inputEmail.text.toString().trim(),
                     binding.inputPassword.text.toString().trim()
                 )
