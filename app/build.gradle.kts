@@ -3,7 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     // Add the Google services Gradle plugin
     id("com.google.gms.google-services")
-
+    // Add the Dokka for Kotlin Documentation
+    id("org.jetbrains.dokka") version "1.8.20"
 }
 
 android {
