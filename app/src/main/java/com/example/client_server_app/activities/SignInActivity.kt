@@ -115,9 +115,15 @@ class SignInActivity : AppCompatActivity() {
                 }
 
             }
-
     }
 
+    /**
+     * This function for email verification
+     *
+     * @param email the type of a String in this function.
+     *
+     * @param password the type of a String in this function.
+     */
     fun EmailVerification(email: String, password: String) {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
