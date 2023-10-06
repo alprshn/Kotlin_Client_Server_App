@@ -15,9 +15,9 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import es.dmoral.toasty.Toasty
 /**
+ * @author Alper Sahin
  *
  * This class for activity sign-in
- *
  * This activity manage user sign-in logic.
  * This activity manage activity_sign_in.xml file
  * @property SignInActivity the name of this class.
@@ -33,6 +33,7 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
         preferenceManager = PreferenceManager(applicationContext)
+        //If user sign-in on the previously it direct the MainActivity
         if (preferenceManager.GetBoolean(Constants.KEY_IS_SIGNED_IN)) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
