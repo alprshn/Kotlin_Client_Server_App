@@ -91,7 +91,9 @@ class SignInActivity : AppCompatActivity() {
             .whereEqualTo(Constants.KEY_PASSWORD, binding.inputPassword.text.toString()).get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful() && task.getResult() != null && task.getResult().documents.size > 0) {
+                    // documentSnapShot for access documents
                     var documentSnapShot: DocumentSnapshot = task.getResult().documents.get(0)
+
                     preferenceManager.PutBoolean(Constants.KEY_IS_SIGNED_IN, true)
                     preferenceManager.PutString(Constants.KEY_USER_ID, documentSnapShot.id)
                     preferenceManager.PutString(
@@ -102,7 +104,9 @@ class SignInActivity : AppCompatActivity() {
                         Constants.KEY_IMAGE,
                         documentSnapShot.getString(Constants.KEY_IMAGE)
                     )
+                    //if success the sign-in It redirect the MainActivity
                     val intent = Intent(this, MainActivity::class.java)
+                    //This flag starts the new task and delete old task
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     startActivity(intent)
                 } else {
