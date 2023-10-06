@@ -138,6 +138,11 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function checks the isEmailVerified
+     * It starts Firebase user and assign currentUser
+     * If email is verified ıt starts SignIn() function
+     */
     fun IsVerified() {
         var firebaseUser: FirebaseUser? = mAuth.currentUser
         if (firebaseUser?.isEmailVerified == true) {
@@ -147,6 +152,11 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function for progressBar
+     * @param isLoading the type of a Boolean in this function.
+     * If isLoading equal the true starts progressBar
+     */
     private fun Loading(isLoading: Boolean) {
         if (isLoading) {
             binding.buttonSignIn.visibility = View.INVISIBLE
@@ -157,6 +167,10 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * @param message the type of a String in this function.
+     * ShowToast function for the Toasty Message
+     */
     private fun ShowToast(message: String) {
         Toasty.info(this, message, Toast.LENGTH_SHORT).show()
     }
