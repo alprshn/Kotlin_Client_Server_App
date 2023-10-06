@@ -71,14 +71,19 @@ class SignInActivity : AppCompatActivity() {
 
     /**
      *
-     * The SetListener function listen all sign-in click event and has all click event
+     * The SignIn function for users sign-in
+     * The SignIn function inside the IsVerified() function
+     * If there is not matching user in the database. It return Toasty Message
      *
-     * The SetListener function is inside the onCreate function.
      */
     fun SignIn() {
+        //Loading function for progress bar and if loading function has a true parameter progress bar starts
         Loading(true)
+        // Creates FireStore connection.
         var database: FirebaseFirestore = FirebaseFirestore.getInstance()
+        //Hides email and password in the HashMap object for FireStore query
         var user: HashMap<String, Any> = HashMap()
+
         database.collection(Constants.KEY_COLLECTION_USERS)
             .whereEqualTo(Constants.KEY_EMAIL, binding.inputEmail.text.toString())
             .whereEqualTo(Constants.KEY_PASSWORD, binding.inputPassword.text.toString()).get()
