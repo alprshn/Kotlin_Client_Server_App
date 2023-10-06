@@ -83,8 +83,10 @@ class SignInActivity : AppCompatActivity() {
         var database: FirebaseFirestore = FirebaseFirestore.getInstance()
         //Hides email and password in the HashMap object for FireStore query
         var user: HashMap<String, Any> = HashMap()
-
+        //It starts to query on FireStore Collections
         database.collection(Constants.KEY_COLLECTION_USERS)
+            //whereEqualTo queries to matching datas(email and password)
+            //The get() call performs the query
             .whereEqualTo(Constants.KEY_EMAIL, binding.inputEmail.text.toString())
             .whereEqualTo(Constants.KEY_PASSWORD, binding.inputPassword.text.toString()).get()
             .addOnCompleteListener { task ->
