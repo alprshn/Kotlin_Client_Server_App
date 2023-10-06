@@ -175,6 +175,12 @@ class SignInActivity : AppCompatActivity() {
         Toasty.info(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * IsValidSignInDetails() checks the all input event
+     * If there is no data in the edit text returns false
+     * If there is data in the edit text returns true
+     * @return the Boolean for input event null or has a data
+     */
     private fun IsValidSignInDetails(): Boolean {
         if (binding.inputEmail.text.toString().trim().isEmpty()) {
             ShowToast("Enter Email")
