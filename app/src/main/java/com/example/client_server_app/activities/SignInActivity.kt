@@ -125,9 +125,12 @@ class SignInActivity : AppCompatActivity() {
      * @param password the type of a String in this function.
      */
     fun EmailVerification(email: String, password: String) {
+        //Tries for sign-in with email and password with Firebase Authentication
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
+                //We take current user
                 var user: FirebaseUser = mAuth.currentUser!!
+                //Starts IsVerified() function
                 IsVerified()
             } else {
                 ShowToast("Invalid Email Or Password")
