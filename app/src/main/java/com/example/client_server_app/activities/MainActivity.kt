@@ -173,10 +173,19 @@ class MainActivity : BaseActivity(), ConversionListener {
             .addOnFailureListener { e -> ShowToast("Unable To Updated Token") }
     }
 
+
+    /**
+     * [GetToken] function takes the FireBase's token.
+     * If takes token is success its commits to [UpdateToken]
+     */
     private fun GetToken() {
         FirebaseMessaging.getInstance().token.addOnSuccessListener(this::UpdateToken)
     }
 
+    /**
+     * [LoadUserDetails] function shows the who wrote the message
+     * It shows the data the who wrote the message
+     */
     private fun LoadUserDetails() {
         binding.textName.text = preferenceManager.getString(Constants.KEY_NAME)
         val bytes: ByteArray =
