@@ -44,10 +44,13 @@ class UsersActivity : BaseActivity(), UserListener {
         binding.imageBack.setOnClickListener { v -> onBackPressed() }
     }
 
+    /**
+     * The [GetUsers] function uses RecyclerView and gets the all users
+     * The [GetUsers] function uses UsersAdapter class
+     */
     private fun GetUsers() {
         Loading(true)
         var database: FirebaseFirestore = FirebaseFirestore.getInstance()
-
         database.collection(Constants.KEY_COLLECTION_USERS).get().addOnCompleteListener { task ->
             Loading(false)
             var currentUserId = preferenceManager.getString(Constants.KEY_USER_ID)
