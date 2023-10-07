@@ -4,7 +4,22 @@ plugins {
     // Add the Google services Gradle plugin
     id("com.google.gms.google-services")
     // Add the Dokka for Kotlin Documentation
-    id("org.jetbrains.dokka") version "1.8.20"
+    id("org.jetbrains.dokka") version "1.9.0"
+}
+subprojects {
+    apply(plugin = "org.jetbrains.dokka")
+
+    // configure only the HTML task
+    tasks.dokkaHtmlPartial {
+        outputDirectory.set(buildDir.resolve("docs/partial"))
+    }
+
+    // configure all format tasks at once
+    tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>().configureEach {
+        dokkaSourceSets.configureEach {
+            includes.from("README.md")
+        }
+    }
 }
 
 android {
