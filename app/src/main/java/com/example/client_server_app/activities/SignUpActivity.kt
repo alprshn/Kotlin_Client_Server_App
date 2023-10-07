@@ -180,6 +180,10 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function for encode image
+     *
+     */
     private fun StrengthPasswordMeter() {
         var meter: PasswordStrengthMeter = binding.passwordInputMeter
 
@@ -202,13 +206,18 @@ class SignUpActivity : AppCompatActivity() {
     private fun EncodeImage(bitMap: Bitmap): String {
         //This variable sets 150 pixels by default
         var previewWidth: Int = 150
-        //
+        //This variable calculated by the ratio of the bitMap parameter and previewWidth
         var previewHeight: Int = bitMap.height * previewWidth / bitMap.width
+        //createScaledBitmap resizes of the BitMap object for the according to small or big layouts
         var previewBitMap: Bitmap =
             Bitmap.createScaledBitmap(bitMap, previewWidth, previewHeight, false)
+        //ByteArrayOutputStream uses to write type of the "byte"
         var byteArrayOutputStream: ByteArrayOutputStream = ByteArrayOutputStream()
+        // previewBitMap will be quality %50. previewBitMap compress %50 on the JPEG format. It will be convert type of the byte array
         previewBitMap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream)
         val bytes: ByteArray = byteArrayOutputStream.toByteArray()
+        // Base64 is a method
+        //Base64 uses binary datas(picture, voice file) for hide on the text base
         return Base64.encodeToString(bytes, Base64.DEFAULT)
     }
 
