@@ -29,7 +29,15 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.messaging.FirebaseMessaging
 import es.dmoral.toasty.Toasty
 
-
+/**
+ * @author Alper Sahin
+ *
+ * This activity manage user [MainActivity] logic.
+ * This activity manage activity_main.xml file
+ * This class for [MainActivity] page
+ * @property MainActivity the name of this class.
+ *
+ */
 class MainActivity : BaseActivity(), ConversionListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var preferenceManager: PreferenceManager
@@ -57,6 +65,10 @@ class MainActivity : BaseActivity(), ConversionListener {
         database = FirebaseFirestore.getInstance()
     }
 
+    /**
+     * The [SetListener] function listen all [MainActivity] click event and has all click event
+     * The [SetListener] function is inside the onCreate function.
+     */
     private fun SetListener() {
         binding.imageSignOut.setOnClickListener { v -> SignOut() }
         binding.fabNewChat.setOnClickListener { v ->
