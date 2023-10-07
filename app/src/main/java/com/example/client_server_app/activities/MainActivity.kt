@@ -155,6 +155,10 @@ class MainActivity : BaseActivity(), ConversionListener {
         ).addSnapshotListener(eventListener)
     }
 
+    /**
+     * @param message the type of a String in this function.
+     * [ShowToast] function for the Toasty Message
+     */
     private fun ShowToast(message: String) {
         Toasty.info(this, message, Toast.LENGTH_SHORT).show()
     }
