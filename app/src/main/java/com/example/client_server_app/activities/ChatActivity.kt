@@ -38,6 +38,15 @@ import java.util.Locale
 import java.util.Objects
 import javax.security.auth.callback.Callback
 
+/**
+ * @author Alper Sahin
+ *
+ * This activity manage user [ChatActivity] logic.
+ * This activity manage activity_chat.xml file
+ * This class for [ChatActivity] page
+ * @property ChatActivity the name of this class.
+ *
+ */
 class ChatActivity : BaseActivity() {
     private lateinit var binding: ActivityChatBinding
     private lateinit var receiverUser: User
@@ -113,6 +122,9 @@ class ChatActivity : BaseActivity() {
         binding.inputMessage.text = null
     }
 
+    /**
+     * The [init] function makes the preset for the all function
+     */
     private fun init() {
         preferenceManager = PreferenceManager(applicationContext)
         chatMessages = ArrayList()
@@ -185,6 +197,10 @@ class ChatActivity : BaseActivity() {
         })
     }
 
+    /**
+     * @param message the type of a String in this function.
+     * [ShowToast] function for the Toasty Message
+     */
     private fun ShowToast(message: String) {
         Toasty.info(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
@@ -204,6 +220,10 @@ class ChatActivity : BaseActivity() {
         binding.textName.text = receiverUser.name
     }
 
+    /**
+     * The [SetListeners] function listen all [ChatActivity] click event and has all click event
+     * The [SetListeners] function is inside the onCreate function.
+     */
     private fun SetListeners() {
         binding.imageBack.setOnClickListener { v -> onBackPressed() }
         binding.layoutSend.setOnClickListener { v -> SendMessage() }
@@ -214,6 +234,11 @@ class ChatActivity : BaseActivity() {
         return dateFormat.format(date)
     }
 
+    /**
+     * [eventListener] listens the changes  Firestore's collections
+     * @param value the type of a QuerySnapshot in this function.
+     * @param error the type of a QuerySnapshot in this function.
+     */
     val eventListener = EventListener<QuerySnapshot> { value, error ->
         if (error !== null) {
             return@EventListener
@@ -317,6 +342,6 @@ class ChatActivity : BaseActivity() {
         ListenAvailabiltyOfReceiver()
     }
 
-    
+
 }
 
