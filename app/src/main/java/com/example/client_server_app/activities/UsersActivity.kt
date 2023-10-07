@@ -102,6 +102,10 @@ class UsersActivity : BaseActivity(), UserListener {
         }
     }
 
+    /**
+     * [OnUserClicked] comes from the [UserListener] interface
+     * It opens the [ChatActivity] for chat
+     */
     override fun OnUserClicked(user: User) {
         val intent = Intent(applicationContext, ChatActivity::class.java)
         intent.putExtra(Constants.KEY_USER, user)
