@@ -1,7 +1,14 @@
 package com.example.client_server_app.utilities
 
+import com.example.client_server_app.firebase.MessagingService
+
+/**
+ * A utility class that contains constant values used throughout the application.
+ * @property Constants the name of this class
+ */
 class Constants {
     companion object {
+        // Collection names and keys for Firestore
         const val KEY_COLLECTION_USERS: String = "users"
         const val KEY_NAME: String = "name"
         const val KEY_EMAIL: String = "email"
@@ -24,12 +31,21 @@ class Constants {
         const val KEY_RECEIVER_IMAGE = "receiverImage"
         const val KEY_LAST_MESSAGE = "lastMessage"
         const val KEY_AVAILABILITY = "availability"
+
+        // SharedPreferences and user authentication keys
         const val REMOTE_MSG_AUTHORIZATION = "Authorization"
         const val REMOTE_MSG_CONTENT_TYPE = "Content-Type"
         const val REMOTE_MSG_DATA = "data"
         const val REMOTE_MSG_REGISTRATION_IDS = "registration_ids"
 
+        // Remote message headers and values
         var remoteMessageHeaders: HashMap<String, String>? = null
+
+        /**
+         * Get the headers for remote messages.
+         *
+         * @return The headers for remote messages.
+         */
         fun getRemoteMsgHeaders(): HashMap<String, String> {
             if (remoteMessageHeaders == null) {
                 remoteMessageHeaders = HashMap()
