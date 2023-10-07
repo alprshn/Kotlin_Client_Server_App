@@ -24,7 +24,15 @@ import nu.aaro.gustav.passwordstrengthmeter.PasswordStrengthMeter
 import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
-
+/**
+ * @author Alper Sahin
+ *
+ * This class for activity sign-up
+ * This activity manage user sign-up logic.
+ * This activity manage activity_sign_up.xml file
+ * @property SignUpActivity the name of this class.
+ *
+ */
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
@@ -42,7 +50,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
     /**
-     * The SetListener function listen all sign-in click event and has all click event
+     * The SetListener function listen all sign-up click event and has all click event
      * The SetListener function is inside the onCreate function.
      */
     private fun SetListener() {
@@ -63,6 +71,10 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * @param message the type of a String in this function.
+     * ShowToast function for the Toasty Message
+     */
     private fun ShowToast(message: String) {
         Toasty.info(this, message, Toast.LENGTH_SHORT).show()
     }
@@ -110,6 +122,12 @@ class SignUpActivity : AppCompatActivity() {
             }
     }
 
+    /**
+     * IsValidSignUpDetails() checks the all input event
+     * If there is no data in the edit text returns false
+     * If there is data in the edit text returns true
+     * @return the Boolean for input event null or has a data
+     */
     private fun IsValidSignUpDetails(): Boolean {
         if (encodedImage == "") {
             ShowToast("Select Profile Image")
@@ -175,8 +193,16 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This function for encode image
+     * @param bitMap the type of a Bitmap in this function.
+     * This function takes the bitMap parameter
+     * @return the String for Base64 type view
+     */
     private fun EncodeImage(bitMap: Bitmap): String {
+        //This variable sets 150 pixels by default
         var previewWidth: Int = 150
+        //
         var previewHeight: Int = bitMap.height * previewWidth / bitMap.width
         var previewBitMap: Bitmap =
             Bitmap.createScaledBitmap(bitMap, previewWidth, previewHeight, false)
@@ -186,6 +212,11 @@ class SignUpActivity : AppCompatActivity() {
         return Base64.encodeToString(bytes, Base64.DEFAULT)
     }
 
+    /**
+     * This function for progressBar
+     * @param isLoading the type of a Boolean in this function.
+     * If isLoading equal the true starts progressBar
+     */
     private fun Loading(isLoading: Boolean) {
         if (isLoading) {
             binding.buttonSignUp.visibility = View.INVISIBLE
