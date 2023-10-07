@@ -19,19 +19,27 @@ import androidx.core.app.NotificationManagerCompat
 import com.example.client_server_app.R
 import com.example.client_server_app.activities.ChatActivity
 import com.example.client_server_app.activities.MainActivity
+import com.example.client_server_app.adapters.ChatAdapter
 import com.example.client_server_app.models.User
 import com.example.client_server_app.utilities.Constants
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.firebase.messaging.ktx.remoteMessage
 import kotlin.random.Random
-
+/**
+ * A Firebase Messaging Service responsible for handling incoming push notifications and creating notifications for chat messages.
+ * @property MessagingService the name of this class
+ */
 class MessagingService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
 
     }
 
-
+    /**
+     * Called when a new FCM message is received.
+     *
+     * @param remoteMessage The received FCM message.
+     */
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         var user: User = User()
