@@ -50,8 +50,8 @@ class SignUpActivity : AppCompatActivity() {
 
 
     /**
-     * The SetListener function listen all sign-up click event and has all click event
-     * The SetListener function is inside the onCreate function.
+     * The [SetListener] function listen all sign-up click event and has all click event
+     * The [SetListener] function is inside the onCreate function.
      */
     private fun SetListener() {
         binding.textSignIn.setOnClickListener { v -> onBackPressed() }
@@ -73,7 +73,7 @@ class SignUpActivity : AppCompatActivity() {
 
     /**
      * @param message the type of a String in this function.
-     * ShowToast function for the Toasty Message
+     * [ShowToast] function for the Toasty Message
      */
     private fun ShowToast(message: String) {
         Toasty.info(this, message, Toast.LENGTH_SHORT).show()
@@ -82,8 +82,8 @@ class SignUpActivity : AppCompatActivity() {
     /**
      * @param email the type of a String in this function.
      * @param password the type of a String in this function.
-     * VerifyEmailAccount has 2 parameter
-     * VerifyEmailAccount takes password and email data. It sends they for the email verification
+     * [VerifyEmailAccount] has 2 parameter
+     * [VerifyEmailAccount] takes password and email data. It sends they for the email verification
      */
     private fun VerifyEmailAccount(email: String, password: String) {
         Loading(true)
@@ -105,8 +105,8 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     /**
-     * The SignUp function for users sign-up
-     * The SignIn function inside the VerifyEmailAccount() function
+     * The [SignUp] function for users sign-up
+     * The [SignIn] function inside the [VerifyEmailAccount] function
      * SignUp function creates HashMap object and sends all data to firebase
      */
     private fun SignUp() {
@@ -132,7 +132,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     /**
-     * IsValidSignUpDetails() checks the all input event
+     * [IsValidSignUpDetails] checks the all input event
      * If there is no data in the edit text returns false
      * If there is data in the edit text returns true
      * @return the Boolean for input event null or has a data

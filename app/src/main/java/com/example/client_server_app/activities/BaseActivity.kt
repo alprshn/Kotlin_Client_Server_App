@@ -6,7 +6,15 @@ import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-
+/**
+ * @author Alper Sahin
+ *
+ * This class for activity sign-up
+ * This activity manage user sign-up logic.
+ * This activity manage activity_sign_up.xml file
+ * @property BaseActivity the name of this class.
+ *
+ */
 open class BaseActivity : AppCompatActivity() {
 
     private lateinit var documentReference: DocumentReference

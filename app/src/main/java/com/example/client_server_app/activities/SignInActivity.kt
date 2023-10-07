@@ -43,8 +43,8 @@ class SignInActivity : AppCompatActivity() {
     }
 
     /**
-     * The SetListener function listen all sign-in click event and has all click event
-     * The SetListener function is inside the onCreate function.
+     * The [SetListener] function listen all sign-in click event and has all click event
+     * The [SetListener] function is inside the onCreate function.
      */
     private fun SetListener() {
         //binding.textCreateNewAccount is if you have not Account you can click and you can sign up
@@ -69,8 +69,8 @@ class SignInActivity : AppCompatActivity() {
     }
 
     /**
-     * The SignIn function for users sign-in
-     * The SignIn function inside the IsVerified() function
+     * The [SignIn] function for users sign-in
+     * The [SignIn] function inside the [IsVerified] function
      * If there is not matching user in the database. It return Toasty Message
      */
     fun SignIn() {
@@ -138,7 +138,7 @@ class SignInActivity : AppCompatActivity() {
     /**
      * This function checks the isEmailVerified
      * It starts Firebase user and assign currentUser
-     * If email is verified ıt starts SignIn() function
+     * If email is verified ıt starts [SignIn] function
      */
     fun IsVerified() {
         var firebaseUser: FirebaseUser? = mAuth.currentUser
@@ -166,14 +166,14 @@ class SignInActivity : AppCompatActivity() {
 
     /**
      * @param message the type of a String in this function.
-     * ShowToast function for the Toasty Message
+     * [ShowToast] function for the Toasty Message
      */
     private fun ShowToast(message: String) {
         Toasty.info(this, message, Toast.LENGTH_SHORT).show()
     }
 
     /**
-     * IsValidSignInDetails() checks the all input event
+     * [IsValidSignInDetails] checks the all input event
      * If there is no data in the edit text returns false
      * If there is data in the edit text returns true
      * @return the Boolean for input event null or has a data
