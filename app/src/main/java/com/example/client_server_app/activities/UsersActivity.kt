@@ -14,7 +14,13 @@ import com.example.client_server_app.models.User
 import com.example.client_server_app.utilities.Constants
 import com.example.client_server_app.utilities.PreferenceManager
 import com.google.firebase.firestore.FirebaseFirestore
-
+/**
+ * @author Alper Sahin
+ *
+ * This class for users page
+ * @property UsersActivity the name of this class.
+ *
+ */
 class UsersActivity : BaseActivity(), UserListener {
     private lateinit var binding: ActivityUsersBinding
     private lateinit var preferenceManager: PreferenceManager
@@ -25,13 +31,15 @@ class UsersActivity : BaseActivity(), UserListener {
         binding = ActivityUsersBinding.inflate(layoutInflater)
         setContentView(binding.root)
         preferenceManager = PreferenceManager(applicationContext)
-        Log.e("Hata", "Hata19")
         SetListeners()
-        Log.e("Hata", "Hata20")
         GetUsers()
         Search()
     }
 
+    /**
+     * The [SetListener] function listen all users page click event and has all click event
+     * The [SetListener] function is inside the onCreate function.
+     */
     private fun SetListeners() {
         binding.imageBack.setOnClickListener { v -> onBackPressed() }
     }
@@ -51,27 +59,22 @@ class UsersActivity : BaseActivity(), UserListener {
                         continue
                     }
                     val user = User()
-                    Log.e("Hata", "Hata2")
                     user.name = queryDocumentSnapShot.getString(Constants.KEY_NAME).toString()
                     user.email = queryDocumentSnapShot.getString(Constants.KEY_EMAIL).toString()
                     user.image = queryDocumentSnapShot.getString(Constants.KEY_IMAGE).toString()
                     user.token = queryDocumentSnapShot.getString(Constants.KEY_FCM_TOKEN).toString()
                     user.id = queryDocumentSnapShot.id
                     users.add(user)
-                    Log.e("Hata", "Hata3")
                 }
                 if (users.size > 0) {
                     usersAdapter = UsersAdapter(users, this)
                     binding.usersRecyclerView.adapter = usersAdapter
-                    Log.e("Hata", "Hata4")
                     binding.usersRecyclerView.visibility = View.VISIBLE
                 } else {
                     ShowErrorMessage()
-                    Log.e("Hata", "Hata5")
                 }
             } else {
                 ShowErrorMessage()
-                Log.e("Hata", "Hata6")
             }
         }
     }
@@ -85,10 +88,8 @@ class UsersActivity : BaseActivity(), UserListener {
 
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
-            Log.e("Hata", "Hata9")
         } else {
             binding.progressBar.visibility = View.INVISIBLE
-            Log.e("Hata", "Hata10")
         }
     }
 
