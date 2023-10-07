@@ -59,6 +59,9 @@ class MainActivity : BaseActivity(), ConversionListener {
         ListenConversations()
     }
 
+    /**
+     * The [init] function makes the preset for the all function
+     */
     private fun init() {
         conversations = ArrayList()
         conversationsAdapter = RecentConversationsAdapter(conversations, this)
@@ -78,8 +81,9 @@ class MainActivity : BaseActivity(), ConversionListener {
     }
 
     /**
-     * [ListenConversations] function listen to changing collection in firebase
-     * It uses addSnapshotListener for the listen
+     * [eventListener] listens the changes  Firestore's collections
+     * @param value the type of a QuerySnapshot in this function.
+     * @param error the type of a QuerySnapshot in this function.
      */
     val eventListener = EventListener<QuerySnapshot> { value, error ->
         if (error !== null) {
@@ -88,7 +92,9 @@ class MainActivity : BaseActivity(), ConversionListener {
 
         if (value != null) {
             var documentChange: DocumentChange
+
             for (documentChange in value.getDocumentChanges()) {
+                //Added means new message
                 if (documentChange.type == DocumentChange.Type.ADDED) {
                     var senderId: String =
                         documentChange.document.getString(Constants.KEY_SENDER_ID).toString()
@@ -121,6 +127,7 @@ class MainActivity : BaseActivity(), ConversionListener {
                     chatMessage.dateObject =
                         documentChange.document.getDate(Constants.KEY_TIMESTAMP)!!
                     conversations.add(chatMessage)
+                    //MODIFIED mean message is updated
                 } else if (documentChange.type == DocumentChange.Type.MODIFIED) {
                     for (i in 0 until conversations.size) {
                         var senderId: String =
