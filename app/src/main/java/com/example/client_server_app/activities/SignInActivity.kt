@@ -69,11 +69,9 @@ class SignInActivity : AppCompatActivity() {
     }
 
     /**
-     *
      * The SignIn function for users sign-in
      * The SignIn function inside the IsVerified() function
      * If there is not matching user in the database. It return Toasty Message
-     *
      */
     fun SignIn() {
         //Loading function for progress bar and if loading function has a true parameter progress bar starts

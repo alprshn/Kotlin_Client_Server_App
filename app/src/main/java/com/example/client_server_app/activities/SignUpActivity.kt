@@ -79,7 +79,12 @@ class SignUpActivity : AppCompatActivity() {
         Toasty.info(this, message, Toast.LENGTH_SHORT).show()
     }
 
-
+    /**
+     * @param email the type of a String in this function.
+     * @param password the type of a String in this function.
+     * VerifyEmailAccount has 2 parameter
+     * VerifyEmailAccount takes password and email data. It sends they for the email verification
+     */
     private fun VerifyEmailAccount(email: String, password: String) {
         Loading(true)
         auth.createUserWithEmailAndPassword(email, password)
@@ -99,7 +104,12 @@ class SignUpActivity : AppCompatActivity() {
             }
     }
 
-
+    /**
+     * IsValidSignUpDetails() checks the all input event
+     * If there is no data in the edit text returns false
+     * If there is data in the edit text returns true
+     * @return the Boolean for input event null or has a data
+     */
     private fun SignUp() {
         Loading(true)
         var database: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -181,12 +191,11 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     /**
-     * This function for encode image
-     *
+     * This function for the password strength
+     * You can use to set the strength password meter in this function
      */
     private fun StrengthPasswordMeter() {
         var meter: PasswordStrengthMeter = binding.passwordInputMeter
-
         meter.setEditText(binding.inputPassword)
         binding.inputPassword.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
