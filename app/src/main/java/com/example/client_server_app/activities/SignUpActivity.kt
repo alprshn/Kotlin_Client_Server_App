@@ -41,7 +41,10 @@ class SignUpActivity : AppCompatActivity() {
     }
 
 
-    //Yeni hesap oluşturmaya geçiş fonksiyonu
+    /**
+     * The SetListener function listen all sign-in click event and has all click event
+     * The SetListener function is inside the onCreate function.
+     */
     private fun SetListener() {
         binding.textSignIn.setOnClickListener { v -> onBackPressed() }
         binding.buttonSignUp.setOnClickListener { v ->
