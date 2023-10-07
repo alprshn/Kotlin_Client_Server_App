@@ -194,6 +194,10 @@ class MainActivity : BaseActivity(), ConversionListener {
         binding.imageProfile.setImageBitmap(bitmap)
     }
 
+    /**
+     * [SignOut] function shows the who wrote the message
+     * It shows the data the who wrote the message
+     */
     private fun SignOut() {
         ShowToast("Signing Out....")
         var database: FirebaseFirestore = FirebaseFirestore.getInstance()
