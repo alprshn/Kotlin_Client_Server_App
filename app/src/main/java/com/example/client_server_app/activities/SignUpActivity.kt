@@ -105,10 +105,9 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     /**
-     * IsValidSignUpDetails() checks the all input event
-     * If there is no data in the edit text returns false
-     * If there is data in the edit text returns true
-     * @return the Boolean for input event null or has a data
+     * The SignUp function for users sign-up
+     * The SignIn function inside the VerifyEmailAccount() function
+     * SignUp function creates HashMap object and sends all data to firebase
      */
     private fun SignUp() {
         Loading(true)
