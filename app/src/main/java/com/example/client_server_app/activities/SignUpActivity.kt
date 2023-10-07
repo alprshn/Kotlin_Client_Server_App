@@ -168,13 +168,22 @@ class SignUpActivity : AppCompatActivity() {
             return true
         }
     }
-
+    /**
+     * This [ActivityResultLauncher] object, for the users choose the picture and [ActivityResultLauncher] saves picture data .
+     * [ActivityResultContracts.StartActivityForResult] starts the activity.
+     * [registerForActivityResult] starts particular activity
+     * @param result returns activity result and "result" is [ActivityResult] obeject.
+     */
     private val pickImage = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
+        //It checks selected picture success
         if (result.resultCode == Activity.RESULT_OK) {
+            //It check for there is data
             if (result.data != null) {
+                //It takes picture Url
                 val imageUri: Uri? = result.data?.data
+                //Picture from the Url converts input stream
                 val inputStream: InputStream? = contentResolver.openInputStream(imageUri!!)
                 try {
                     val bitmap = BitmapFactory.decodeStream(inputStream)
