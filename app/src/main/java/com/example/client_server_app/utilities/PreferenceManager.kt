@@ -3,6 +3,7 @@ package com.example.client_server_app.utilities
 import android.content.Context
 import android.content.SharedPreferences
 /**
+ * @author Alper Sahin
  * A utility class for managing and accessing SharedPreferences in the application.
  * @property PreferenceManager the name of this class
  * @param context The application context used for accessing SharedPreferences.

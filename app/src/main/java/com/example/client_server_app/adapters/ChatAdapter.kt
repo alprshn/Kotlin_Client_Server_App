@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.client_server_app.activities.ChatActivity
 import com.example.client_server_app.databinding.ItemContainerReceivedMessageBinding
 import com.example.client_server_app.databinding.ItemContainerSentMessageBinding
 
 import com.example.client_server_app.models.ChatMessage
 /**
+ * @author Alper Sahin
  * An adapter class for populating a RecyclerView with chat messages in a chat interface.
  *
  * @param receiverProfileImage The profile image of the receiver (can be null if not available).

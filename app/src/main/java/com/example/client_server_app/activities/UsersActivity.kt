@@ -1,11 +1,9 @@
 package com.example.client_server_app.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import com.example.client_server_app.adapters.UsersAdapter
 import com.example.client_server_app.databinding.ActivityUsersBinding

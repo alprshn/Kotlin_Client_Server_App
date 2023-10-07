@@ -1,8 +1,8 @@
 package com.example.client_server_app.utilities
 
-import com.example.client_server_app.firebase.MessagingService
 
 /**
+ * @author Alper Sahin
  * A utility class that contains constant values used throughout the application.
  * @property Constants the name of this class
  */

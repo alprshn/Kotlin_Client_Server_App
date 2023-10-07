@@ -2,6 +2,7 @@ package com.example.client_server_app.models
 
 import java.io.Serializable
 /**
+ * @author Alper Sahin
  * A class representing a user in the application.
  *
  * @property name The name of the user.

@@ -1,7 +1,6 @@
 package com.example.client_server_app.activities
 
 import android.Manifest.permission.POST_NOTIFICATIONS
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -10,7 +9,6 @@ import android.os.Bundle
 import android.util.Base64
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.client_server_app.adapters.RecentConversationsAdapter

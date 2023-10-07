@@ -11,6 +11,7 @@ import com.example.client_server_app.databinding.ItemContainerUserBinding
 import com.example.client_server_app.listeners.UserListener
 import com.example.client_server_app.models.User
 /**
+ * @author Alper Sahin
  * An adapter class for populating a RecyclerView with a list of [User] objects.
  *
  * @param users The list of users to display in the RecyclerView.

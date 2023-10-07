@@ -14,6 +14,7 @@ import com.example.client_server_app.models.ChatMessage
 import com.example.client_server_app.models.User
 
 /**
+ * @author Alper Sahin
  * An adapter class for populating a RecyclerView with a list of recent chat conversations.
  *
  * @param chatMessages The list of chat messages representing recent conversations.

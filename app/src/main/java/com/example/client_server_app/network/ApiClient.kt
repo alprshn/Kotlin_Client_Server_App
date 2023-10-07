@@ -1,10 +1,10 @@
 package com.example.client_server_app.network
 
-import com.example.client_server_app.firebase.MessagingService
 import retrofit2.Retrofit
 import retrofit2.Retrofit.*
 import retrofit2.converter.scalars.ScalarsConverterFactory
 /**
+ * @author Alper Sahin
  * Singleton class responsible for creating and providing an instance of Retrofit for making network requests.
  * @property ApiClient the name of this class
  */

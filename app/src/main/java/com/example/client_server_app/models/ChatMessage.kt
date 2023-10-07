@@ -1,8 +1,8 @@
 package com.example.client_server_app.models
 
-import com.example.client_server_app.listeners.UserListener
 import java.util.Date
 /**
+ * @author Alper Sahin
  * A class representing a chat message in the application.
  * @property ChatMessage the name of this class.
  */

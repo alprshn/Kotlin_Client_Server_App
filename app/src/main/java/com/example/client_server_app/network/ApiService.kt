@@ -4,6 +4,7 @@ import retrofit2.http.Body
 import retrofit2.http.HeaderMap
 import retrofit2.http.POST
 /**
+ * @author Alper Sahin
  * Retrofit API interface for defining network endpoints and requests.
  * @property ApiService the name of this interface
  */

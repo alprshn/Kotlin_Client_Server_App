@@ -1,8 +1,8 @@
 package com.example.client_server_app.listeners
 
-import com.example.client_server_app.firebase.MessagingService
 import com.example.client_server_app.models.User
 /**
+ * @author Alper Sahin
  * Listener interface for handling click events on conversation items within a user list.
  * @property ConversionListener the name of this interface
  */

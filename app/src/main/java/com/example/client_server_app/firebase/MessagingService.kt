@@ -1,32 +1,23 @@
 package com.example.client_server_app.firebase
 
 import android.Manifest
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.TaskStackBuilder
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Build
-import android.util.Base64
-import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.client_server_app.R
 import com.example.client_server_app.activities.ChatActivity
-import com.example.client_server_app.activities.MainActivity
-import com.example.client_server_app.adapters.ChatAdapter
 import com.example.client_server_app.models.User
 import com.example.client_server_app.utilities.Constants
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.google.firebase.messaging.ktx.remoteMessage
-import kotlin.random.Random
 /**
+ * @author Alper Sahin
  * A Firebase Messaging Service responsible for handling incoming push notifications and creating notifications for chat messages.
  * @property MessagingService the name of this class
  */
