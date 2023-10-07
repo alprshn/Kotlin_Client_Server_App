@@ -79,11 +79,20 @@ class UsersActivity : BaseActivity(), UserListener {
         }
     }
 
+    /**
+     * This function for [ShowErrorMessage]
+     * If there in no users. [ShowErrorMessage] will be active
+     */
     private fun ShowErrorMessage() {
         binding.textErrorMessage.text = String.format("%s", "No User Available")
         binding.textErrorMessage.visibility = View.VISIBLE
     }
 
+    /**
+     * This function for progressBar
+     * @param isLoading the type of a Boolean in this function.
+     * If isLoading equal the true starts progressBar
+     */
     private fun Loading(isLoading: Boolean) {
 
         if (isLoading) {
