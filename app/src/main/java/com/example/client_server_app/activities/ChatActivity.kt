@@ -2,14 +2,10 @@ package com.example.client_server_app.activities
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.DnsResolver
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Base64
 import android.view.View
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import com.example.client_server_app.adapters.ChatAdapter
 import com.example.client_server_app.databinding.ActivityChatBinding
 import com.example.client_server_app.models.ChatMessage
@@ -26,7 +22,6 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import es.dmoral.toasty.Toasty
-import org.checkerframework.checker.nullness.qual.NonNull
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -36,7 +31,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.Objects
-import javax.security.auth.callback.Callback
 
 /**
  * @author Alper Sahin
@@ -67,6 +61,10 @@ class ChatActivity : BaseActivity() {
         ListenMessages()
     }
 
+    /**
+     * [SendMessage] function for the send message
+     * It created HashMap object and put in the user information
+     */
     private fun SendMessage() {
         var message: HashMap<String, Any> = HashMap()
         message.put(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID)!!)
@@ -137,6 +135,9 @@ class ChatActivity : BaseActivity() {
         database = FirebaseFirestore.getInstance()
     }
 
+    /**
+     * The [ListenAvailabiltyOfReceiver] function checks receiver for the availability
+     */
     fun ListenAvailabiltyOfReceiver() {
         database.collection(Constants.KEY_COLLECTION_USERS).document(receiverUser.id)
             .addSnapshotListener { value, error ->
@@ -145,6 +146,7 @@ class ChatActivity : BaseActivity() {
                 }
                 if (value != null) {
                     if (value.getLong(Constants.KEY_AVAILABILITY) != null) {
+                        //requireNonNull checks null or not
                         var availability: Int =
                             Objects.requireNonNull(value.getLong(Constants.KEY_AVAILABILITY))!!
                                 .toInt()
@@ -165,6 +167,11 @@ class ChatActivity : BaseActivity() {
             }
     }
 
+    /**
+     * @param messageBody the type of a String in this function.
+     * [SendNotification] function for the send notification
+     * It uses the Api
+     */
     private fun SendNotification(messageBody: String) {
         val apiService = ApiClient.GetClient()?.create(ApiService::class.java)
         val headers = Constants.getRemoteMsgHeaders()
@@ -205,6 +212,12 @@ class ChatActivity : BaseActivity() {
         Toasty.info(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * This function for encode image
+     * @param encodedImage the type of a String in this function.
+     * This function takes the bitMap parameter
+     * @return the Bitmap for Base64 type view
+     */
     private fun GetBitmapFromEncodedString(encodedImage: String): Bitmap? {
         if (encodedImage != null) {
             val bytes: ByteArray = Base64.decode(encodedImage, Base64.DEFAULT)
@@ -212,9 +225,14 @@ class ChatActivity : BaseActivity() {
         } else {
             return null
         }
-
     }
 
+    /**
+     * This function for encode image
+     * @param bitMap the type of a Bitmap in this function.
+     * This function takes the bitMap parameter
+     * @return the String for Base64 type view
+     */
     private fun LoadReceiverDetails() {
         receiverUser = intent.getSerializableExtra(Constants.KEY_USER) as User
         binding.textName.text = receiverUser.name
@@ -229,6 +247,11 @@ class ChatActivity : BaseActivity() {
         binding.layoutSend.setOnClickListener { v -> SendMessage() }
     }
 
+    /**
+     * The [GetReadableDateTime] function for the instant date time
+     * @param date the type of a Date in this function.
+     * @return the String for dateFormat
+     */
     private fun GetReadableDateTime(date: Date?): String {
         val dateFormat = SimpleDateFormat("MMMM dd, yyyy - hh:mm a", Locale.getDefault())
         return dateFormat.format(date)
@@ -280,11 +303,21 @@ class ChatActivity : BaseActivity() {
         }
     }
 
+    /**
+     * [AddConversion] function for add conversion
+     * @param conversion the type of a HashMap<String, Any> in this function.
+     *
+     */
     private fun AddConversion(conversion: HashMap<String, Any>) {
         database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).add(conversion)
             .addOnSuccessListener { documentReference -> conversionId = documentReference.id }
     }
 
+    /**
+     * [UpdateConversion] function for updates last conversion
+     * @param message the type of String in this function.
+     *
+     */
     private fun UpdateConversion(message: String) {
         var documentReference: DocumentReference =
             database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
@@ -294,6 +327,10 @@ class ChatActivity : BaseActivity() {
         )
     }
 
+    /**
+     * [ListenMessages] function listen to changing collection in firebase
+     * It uses addSnapshotListener for the listen
+     */
     private fun ListenMessages() {
         database.collection(Constants.KEY_COLLECTION_CHAT).whereEqualTo(
             Constants.KEY_SENDER_ID,
@@ -308,7 +345,11 @@ class ChatActivity : BaseActivity() {
             ).addSnapshotListener(eventListener)
     }
 
-
+    /**
+     * [CheckForConversionRemotly] function for check conversation
+     * @param senderId the type of String in this function.
+     * @param receiverId the type of String in this function.
+     */
     private fun CheckForConversionRemotly(senderId: String, receiverId: String) {
         database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
             .whereEqualTo(Constants.KEY_SENDER_ID, senderId)
@@ -317,6 +358,9 @@ class ChatActivity : BaseActivity() {
             )
     }
 
+    /**
+     * [CheckForConversion] function for check conversation
+     */
     private fun CheckForConversion() {
         if (chatMessages.size != 0) {
             CheckForConversionRemotly(
@@ -330,6 +374,10 @@ class ChatActivity : BaseActivity() {
         }
     }
 
+    /**
+     * [CheckForConversionRemotly] function for check conversation
+     * If cycle completes. (documentSnapshot.id) assigns conversionId
+     */
     val conversionOnCompleteListener = OnCompleteListener<QuerySnapshot> { task ->
         if (task.isSuccessful && task.result != null && task.result.documents.size > 0) {
             var documentSnapshot: DocumentSnapshot = task.result.documents.get(0)
@@ -337,6 +385,10 @@ class ChatActivity : BaseActivity() {
         }
     }
 
+    /**
+     * The [onResume] function  starts on the app resume
+     * It checks user availability status
+     */
     override fun onResume() {
         super.onResume()
         ListenAvailabiltyOfReceiver()

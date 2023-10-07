@@ -5,12 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.client_server_app.activities.ChatActivity
 import com.example.client_server_app.databinding.ItemContainerReceivedMessageBinding
 import com.example.client_server_app.databinding.ItemContainerSentMessageBinding
 
 import com.example.client_server_app.models.ChatMessage
 
-
+/**
+ * @author Alper Sahin
+ *
+ * This activity manage user [ChatActivity] logic.
+ * This activity manage activity_chat.xml file
+ * This class for [ChatActivity] page
+ * @property ChatActivity the name of this class.
+ *
+ */
 class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private var receiverProfileImage: Bitmap? = null
     private lateinit var chatMessage: List<ChatMessage>
