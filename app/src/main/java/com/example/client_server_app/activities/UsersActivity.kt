@@ -125,8 +125,11 @@ class UsersActivity : BaseActivity(), UserListener {
             }
         })
     }
+
     /**
-     * This function for search user with email
+     * @param text the type of a String in this function.
+     * It send the searchBar's text in ArrayList
+     * It filter user with email
      */
     fun filter(text: String) {
         var filteredList: ArrayList<User> = ArrayList()
