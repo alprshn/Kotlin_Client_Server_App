@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.example.client_server_app.adapters.RecentConversationsAdapter
 import com.example.client_server_app.databinding.ActivityMainBinding
 import com.example.client_server_app.listeners.ConversionListener
+import com.example.client_server_app.listeners.UserListener
 import com.example.client_server_app.models.ChatMessage
 import com.example.client_server_app.models.User
 import com.example.client_server_app.utilities.Constants
@@ -76,6 +77,10 @@ class MainActivity : BaseActivity(), ConversionListener {
         }
     }
 
+    /**
+     * [ListenConversations] function listen to changing collection in firebase
+     * It uses addSnapshotListener for the listen
+     */
     val eventListener = EventListener<QuerySnapshot> { value, error ->
         if (error !== null) {
             return@EventListener
@@ -144,6 +149,10 @@ class MainActivity : BaseActivity(), ConversionListener {
         }
     }
 
+    /**
+     * [ListenConversations] function listen to changing collection in firebase
+     * It uses addSnapshotListener for the listen
+     */
     private fun ListenConversations() {
         database.collection(Constants.KEY_COLLECTION_CONVERSATIONS).whereEqualTo(
             Constants.KEY_SENDER_ID,
@@ -163,6 +172,10 @@ class MainActivity : BaseActivity(), ConversionListener {
         Toasty.info(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * @param token the type of a String in this function.
+     * [UpdateToken] function for update token
+     */
     private fun UpdateToken(token: String) {
         preferenceManager.PutString(Constants.KEY_FCM_TOKEN, token)
         var database: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -195,8 +208,7 @@ class MainActivity : BaseActivity(), ConversionListener {
     }
 
     /**
-     * [SignOut] function shows the who wrote the message
-     * It shows the data the who wrote the message
+     * [SignOut] function for the signout activity
      */
     private fun SignOut() {
         ShowToast("Signing Out....")
@@ -215,12 +227,21 @@ class MainActivity : BaseActivity(), ConversionListener {
             }.addOnFailureListener { e -> ShowToast("Unable To Sign Out") }
     }
 
+    /**
+     * [OnUserClicked] comes from the [UserListener] interface
+     * It opens the [ChatActivity] for chat
+     * @param user the type of a User in this function.
+     */
     override fun OnConversionClicked(user: User) {
         val intent = Intent(applicationContext, ChatActivity::class.java)
         intent.putExtra(Constants.KEY_USER, user)
         startActivity(intent)
     }
 
+    /**
+     * [NotificationPermission] function for the notification permission
+     * It sends permission message for notification
+     */
     fun NotificationPermission() {
         if (ContextCompat.checkSelfPermission(
                 this,
