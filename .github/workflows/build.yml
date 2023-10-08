@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: dokka-docs
-          path: app/build/dokka/html
+          path: app/build/dokka/dokkaHtml
 
   release:
     name: Release APK and Documentation
