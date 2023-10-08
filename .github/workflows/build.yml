@@ -2,7 +2,7 @@ name: Android Build Release Workflow
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -38,8 +38,8 @@ jobs:
       - name: upload artefact to App Center
         uses: wzieba/AppCenter-Github-Action@v1
         with:
-          appName: ronakukani/Github-Actions-Demo
-          token: ${{secrets.APP_CENTER_TOKEN}}
+          appName: alprshn/Kotlin_Client_Server_App
+          token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
           group: Testers
           file: app/build/outputs/apk/release/app-release.apk
           notifyTesters: true
