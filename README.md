@@ -20,6 +20,40 @@ The main technologies and libraries used in this project include:
 - **Toasty**: Toasty library is used for displaying informative messages to the user.
 - **Password Strength Meter**: The Password Strength Meter library is used for checking password strength.
 
+## Gradle plugins and dependencies
+```groovy
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    // Add the Google services Gradle plugin
+    id("com.google.gms.google-services")
+    // Add the Dokka for Kotlin Documentation
+    id("org.jetbrains.dokka") version "1.9.0"
+}
+
+dependencies {
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    // Other dependencies...
+
+    // Email Verification
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+    // Also add the dependency for the Google Play services library and specify its version
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    // Strength Password Meter
+    implementation("nu.aaro.gustav:passwordstrengthmeter:0.4")
+}```
+
 ## Installation
 
 To run the application in a local development environment, you can follow these steps:
