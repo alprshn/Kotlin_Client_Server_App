@@ -21,7 +21,7 @@ The main technologies and libraries used in this project include:
 - **Password Strength Meter**: The Password Strength Meter library is used for checking password strength.
 
 ## Gradle plugins and dependencies
-```groovy
+```
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -52,7 +52,8 @@ dependencies {
 
     // Strength Password Meter
     implementation("nu.aaro.gustav:passwordstrengthmeter:0.4")
-}```
+}
+```
 
 ## Installation
 
