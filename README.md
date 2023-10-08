@@ -39,3 +39,11 @@ To run the application in a local development environment, you can follow these 
 ## Contributing
 
 If you wish to contribute, please take a look at our contribution guide, and feel free to open issues and requests.
+
+## License
+
+This project is licensed under the MIT License. For more information, please see the [LICENSE](LICENSE) file.
+
+---
+
+We hope this README file helps you understand how to set up and use your application. Happy coding!
