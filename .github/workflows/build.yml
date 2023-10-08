@@ -84,13 +84,5 @@ jobs:
           asset_path: apk/app-debug.apk
           asset_name: ${{ github.event.repository.name }}.apk
           asset_content_type: application/zip
-      - name: Upload Dokka Documentation
-        id: upload_docs_asset
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: Client_Server_App\app\build\dokka\dokkaHtml
-          asset_name: dokka-docs
-          asset_content_type: text/html
+      
+        
