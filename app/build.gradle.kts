@@ -1,3 +1,5 @@
+import java.net.URL
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,21 +8,65 @@ plugins {
     // Add the Dokka for Kotlin Documentation
     id("org.jetbrains.dokka") version "1.9.0"
 }
-subprojects {
-    apply(plugin = "org.jetbrains.dokka")
+tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
+    moduleName.set("ClientServerApp")
+    moduleVersion.set(project.version.toString())
+    outputDirectory.set(buildDir.resolve("dokka/$name"))
+    failOnWarning.set(false)
+    suppressObviousFunctions.set(true)
+    suppressInheritedMembers.set(false)
+    offlineMode.set(false)
 
-    // configure only the HTML task
-    tasks.dokkaHtmlPartial {
-        outputDirectory.set(buildDir.resolve("docs/partial"))
-    }
+    dokkaSourceSets.configureEach {
+        suppress.set(false)
+        displayName.set(name)
+        documentedVisibilities.set(setOf(org.jetbrains.dokka.DokkaConfiguration.Visibility.PUBLIC))
+        reportUndocumented.set(true)//
+        skipEmptyPackages.set(true)
+        skipDeprecated.set(true)//
+        suppressGeneratedFiles.set(true)
+        jdkVersion.set(8)
+        languageVersion.set("1.7")
+        apiVersion.set("1.7")
+        noStdlibLink.set(false)
+        noJdkLink.set(false)
+        noAndroidSdkLink.set(true)
+        //includes.from(project.files(), "packages.md", "extra.md")
+        platform.set(org.jetbrains.dokka.Platform.Companion.DEFAULT)
+        sourceRoots.from(file("src"))
 
-    // configure all format tasks at once
-    tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>().configureEach {
-        dokkaSourceSets.configureEach {
-            includes.from("README.md")
+        sourceLink {
+            localDirectory.set(projectDir.resolve("src"))
+            remoteUrl.set(URL("https://github.com/alprshn/Kotlin_Client_Server_App/tree/main/app/src"))
+            remoteLineSuffix.set("#L")
+        }
+
+        externalDocumentationLink {
+            url.set(URL("https://kotlinlang.org/api/latest/jvm/stdlib/"))
+            packageListUrl.set(
+                rootProject.projectDir.resolve("stdlib.package.list").toURL()
+            )
+        }
+
+        perPackageOption {
+            matchingRegex.set(".*api.*")
+            suppress.set(false)
+            skipDeprecated.set(false)
+            reportUndocumented.set(false)
+            documentedVisibilities.set(
+                setOf(
+                    org.jetbrains.dokka.DokkaConfiguration.Visibility.PUBLIC,
+                    org.jetbrains.dokka.DokkaConfiguration.Visibility.PRIVATE,
+                    org.jetbrains.dokka.DokkaConfiguration.Visibility.PROTECTED,
+                    org.jetbrains.dokka.DokkaConfiguration.Visibility.INTERNAL,
+                    org.jetbrains.dokka.DokkaConfiguration.Visibility.PACKAGE
+                )
+            )
         }
     }
 }
+
+
 
 android {
     namespace = "com.example.client_server_app"
